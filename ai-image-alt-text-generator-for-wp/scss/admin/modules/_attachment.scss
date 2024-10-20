@@ -1,0 +1,29 @@
+#bdaiatg-generate-button {
+  margin-top: 16px;
+
+  #bdaiatg-generate-button-anchor {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2271b1;
+    padding: 8px 16px;
+
+    img {
+      width: 20px;
+    }
+
+    span {
+      font-size: 14px;
+      color: #fff;
+      font-weight: 500;
+    }
+  }
+
+  #bdaiatg-generate-button-checkbox-wrapper {
+    margin-top: 10px;
+  }
+
+  #bdaiatg-generate-button-textfield-wrapper {
+    margin-top: 10px;
+  }
+}

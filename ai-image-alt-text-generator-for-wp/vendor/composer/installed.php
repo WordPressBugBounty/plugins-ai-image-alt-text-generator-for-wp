@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => NULL,
+        'name' => '__root__',
+        'dev' => false,
+    ),
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => NULL,
+            'dev_requirement' => false,
+        ),
+        'appsero/client' => array(
+            'pretty_version' => 'v2.0.2',
+            'version' => '2.0.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../appsero/client',
+            'aliases' => array(),
+            'reference' => 'b61c3ab21df4d44f805ee9476f9d880f8370a36b',
+            'dev_requirement' => false,
+        ),
+        'deliciousbrains/wp-background-processing' => array(
+            'pretty_version' => '1.3.1',
+            'version' => '1.3.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../deliciousbrains/wp-background-processing',
+            'aliases' => array(),
+            'reference' => '6d1e48165e461260075b9f161b3861c7278f71e7',
+            'dev_requirement' => false,
+        ),
+    ),
+);

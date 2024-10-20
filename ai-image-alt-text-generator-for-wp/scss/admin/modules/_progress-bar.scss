@@ -1,0 +1,96 @@
+.baiatgd_progress_bar_wrapper {
+  margin-top: 40px;
+  .baiatgd_percentage_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      color: #212529;
+    }
+  }
+  .progress-bar {
+    background-color: #E4E4E4;
+    border-radius: 10px;
+    height: 16px;
+  }
+  .progress {
+    width: 0;
+    border-radius: 10px;
+    height: 16px;
+    text-align: right;
+  }
+}
+
+// For Bulk
+.baiatgd_bulk_progress_card {
+  margin-top: 40px;
+  display: none;
+
+  .baiatgd_bulk_progress_bar_wrapper {
+    background: #F8F9FA;
+    border: 1px solid #E4E4E4;
+    border-radius: 12px;
+    padding: 40px;
+
+    .baiatgd_percentage_wrapper{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      span {
+        font-size: 14px;
+        font-weight: 500;
+        color: #212529;
+      }
+      .baiatgd_bulk_cancal{
+        color: #4834D4;
+        cursor: pointer;
+        &:before{
+          content: '\00d7';
+          font-size: 20px;
+        }
+      }
+    }
+    .progress-bar {
+      background-color: #E4E4E4;
+      border-radius: 10px;
+      height: 16px;
+    }
+    .progress {
+      width: 0;
+      border-radius: 10px;
+      height: 16px;
+      text-align: right;
+    }
+  }
+
+  .baiatgd_bulk_progress_optimized {
+    font-size: 16px;
+    color: #212529;
+    font-weight: 500;
+    line-height: 24px;
+    margin-top: 24px;
+    text-align: center;
+  }
+}
+
+.jq-toast-single {
+  border-radius: 12px;
+  padding: 18px 16px 18px 40px;
+
+  h2 {
+    margin-bottom: 2px !important;
+  }
+
+  &.jq-icon-warning {
+    background-image: url("../img/warning.png");
+    background-repeat: no-repeat;
+  }
+
+  &.jq-icon-success {
+    background-image: url("../img/success.png");
+    background-repeat: no-repeat;
+  }
+}

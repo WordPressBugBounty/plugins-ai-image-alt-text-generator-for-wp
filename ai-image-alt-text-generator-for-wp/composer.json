@@ -1,0 +1,6 @@
+{
+    "require": {
+        "deliciousbrains/wp-background-processing": "^1.3",
+        "appsero/client": "^2.0"
+    }
+}

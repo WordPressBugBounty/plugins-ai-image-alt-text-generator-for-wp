@@ -1,0 +1,285 @@
+.boomdevs_ai_img_alt_text_generator {
+  .csf-header {
+    &.csf-sticky {
+      height: auto;
+
+      .csf-header-inner {
+        position: relative;
+        top: 0;
+        box-shadow: none;
+      }
+    }
+
+    .csf-header-inner {
+      background-color: #fff;
+      padding: 30px 30px 14px;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .csf-header-left {
+
+      h1 {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 28px;
+        color: #1E1E1E;
+      }
+    }
+
+    //.csf-header-right {
+    //  display: none;
+    //}
+  }
+
+  .csf-wrapper {
+    padding: 0px 30px 48px;
+    background-color: #fff;
+  }
+
+  .csf-section {
+    .csf-section-title {
+      margin-bottom: 16px;
+    }
+  }
+
+  .csf-nav {
+    .csf-tab-item {
+      a {
+        font-size: 13px;
+        font-weight: 400;
+        color: #1E1E1E8C;
+        padding: 18px 18px 18px 20px;
+        background-color: transparent;
+        border-radius: 4px;
+        border: none;
+
+        &.csf-active {
+          background-color: #F0F6FC;
+          color: #1E1E1E;
+
+          &:after {
+            display: none;
+          }
+
+          &:before {
+            background-color: #1E1E1E;
+          }
+        }
+
+        &:before {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          height: 3px;
+          width: 3px;
+          background: #757575;
+          border-radius: 50%;
+          content: "";
+        }
+
+        &:hover {
+          color: inherit;
+        }
+      }
+    }
+  }
+
+  .csf-field {
+    border: none;
+    padding: 0;
+    margin-bottom: 16px;
+    position: relative;
+
+    &.csf-field-backup {
+      padding: 0;
+    }
+
+    &.csf-field-heading {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      padding: 0;
+      color: #1e1e1e;
+      background-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    &.csf-field-content {
+      font-size: 12px;
+      font-weight: 400;
+      color: #757575;
+      padding: 0;
+      line-height: 16px;
+    }
+
+    .csf-title {
+      float: none;
+      width: 100%;
+
+      h4 {
+        font-size: 16px;
+        line-height: 26px;
+        font-weight: 500;
+        color: #1E1E1E;
+        margin-bottom: 6px;
+      }
+
+      .csf-subtitle-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #757575;
+        line-height: 16px;
+      }
+    }
+
+    .csf-fieldset {
+      float: none;
+      width: 100%;
+
+      .csf--switcher {
+        height: 18px;
+        width: 36px;
+        background: transparent;
+        border: 1px solid #1e1e1e;
+        border-radius: 100px;
+        position: absolute;
+        left: 0;
+        top: 1px !important;
+        float: none;
+
+        &.csf--active {
+          background: #2271B1;
+          border-color: #2271B1;
+
+          .csf--ball {
+            margin-left: -15px;
+            left: 100%;
+            background: #fff;
+          }
+        }
+      }
+
+      .csf--on {
+        display: none;
+      }
+
+      .csf--off {
+        display: none;
+      }
+
+      .csf--ball {
+        top: 3px;
+        left: 3px;
+        width: 12px;
+        height: 12px;
+        background-color: #1e1e1e;
+        border-radius: 50%;
+        box-shadow: none;
+      }
+    }
+
+    .csf-fieldset-content {
+      border: none;
+      box-shadow: none;
+
+      & > .csf-field {
+        padding: 0;
+        margin: 0;
+
+        .csf--switcher {
+          left: -54px;
+        }
+      }
+
+      .csf-field-text, .csf-field-upload {
+        margin-top: 6px;
+
+        input {
+          height: 40px;
+          max-width: 426px;
+          width: 100%;
+          border: 1px solid #949494;
+          border-radius: 2px;
+          padding: 10px 16px;
+          color: #1e1e1e;
+          font-size: 13px;
+          line-height: 20px;
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+
+      .csf-field-upload {
+
+        .button {
+          height: 40px;
+          font-size: 13px;
+          line-height: 20px;
+          border-radius: 3px;
+          margin-left: 6px;
+          padding: 10px 16px;
+        }
+      }
+
+      .csf-field-number {
+        margin-top: 6px;
+
+        .csf--wrap {
+          max-width: 426px;
+          width: 100%;
+
+          input {
+            height: 40px;
+            width: 100%;
+            border: 1px solid #949494;
+            border-radius: 2px;
+            padding: 10px 16px;
+            color: #1e1e1e;
+            font-size: 13px;
+            line-height: 20px;
+
+            &:focus {
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .csf-nav-background {
+    background-color: #fff;
+  }
+
+  .csf-footer {
+    background: #f9f9f9;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .csf-import-data {
+    display: none;
+  }
+
+  .csf-import {
+    display: none;
+  }
+
+  hr {
+    display: none;
+  }
+
+  .csf-export-data {
+    display: none;
+  }
+
+  .csf-reset {
+    display: none;
+  }
+}
+
+.theme-actions .active-theme a[href^="themes.php?page=bulk-theme-delete"] {
+  display: none;
+}

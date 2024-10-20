@@ -1,0 +1,61 @@
+.bdai_alt_text_gutenburg_generator {
+  .bdaiatg_alt_text_gutenburg_generator_content {
+
+    .bdaiatg_alt_text_gutenburg_generator_content_checkbox {
+      margin-bottom: 10px;
+    }
+
+    #bdaiatg-generate-button-keywords-seo {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .bdaiatg_alt_text_gen_btn_post {
+      button {
+        .loader {
+          display: none;
+        }
+      }
+    }
+
+    #bdaiatg_alt_text_gen_btn {
+
+      button {
+        background: #007cba;
+        border: none;
+        color: #fff;
+        height: 32px;
+        font-size: 13px;
+        font-weight: 400;
+        border-radius: 2px;
+        padding: 0 4px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 10px;
+      }
+    }
+  }
+}
+
+.loader {
+  border: 2px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  transition: all 0.3s ease-in-out;
+  width: 15px;
+  height: 15px;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
