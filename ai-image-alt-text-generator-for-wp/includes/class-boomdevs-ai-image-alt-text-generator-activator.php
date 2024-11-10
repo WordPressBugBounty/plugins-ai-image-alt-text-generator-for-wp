@@ -3,7 +3,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       https://boomdevs.com
+ * @link       https://wpmessiah.com
  * @since      1.0.0
  *
  * @package    Boomdevs_Ai_Image_Alt_Text_Generator

@@ -8,7 +8,7 @@
  * outline and functionality remain consistent.
  *
  * For more information on plugin uninstallation, refer to the following link:
- * @link       https://boomdevs.com
+ * @link       https://wpmessiah.com/
  * @since      1.0.0
  *
  * @package    Boomdevs_Ai_Image_Alt_Text_Generator

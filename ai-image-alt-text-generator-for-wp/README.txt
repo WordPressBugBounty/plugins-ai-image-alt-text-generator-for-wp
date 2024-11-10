@@ -1,9 +1,9 @@
 === Ai Image Alt Text Generator for WP ===
-Contributors: boomdevs
+Contributors: boomdevs, wpmessiah
 Tags: Alternative Text, image alt text
 Requires at least: 5.0
-Tested up to: 6.4.3
-Stable tag: 1.0.1
+Tested up to: 6.6.2
+Stable tag: 1.0.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -57,26 +57,16 @@ Customize your alt text generation to perfection. Choose the language, add uniqu
 
 [View Demo](https://aialttext.boomdevs.com/)
 
-[Read Documentation](https://boomdevs.com/docs/ai-image-alt-text-generator/)
+[Read Documentation](https://wpmessiah.com/docs/ai-image-alt-text-generator/)
 
-[Submit Ticket](https://boomdevs.com/forums/forum/ai-image-alt-text-generator/)
+[Submit Ticket](https://wpmessiah.com/forums/forum/ai-image-alt-text-generator/)
 
-Made with ❣️ By [BoomDevs](https://boomdevs.com/)
+Made with ❣️ By [WP Messiah](https://wpmessiah.com/)
 
 **If you really like this plugin please don't forget to give us your rating. Thanks so much!** ⭐⭐⭐⭐⭐
 
 
 Ready to take your image SEO game to new heights? Get started today with our free AI Alt Text Generator for WordPress and experience the power of automation firsthand. Boost your website's accessibility, search engine rankings, and user experience with just a few clicks – because optimizing your images should be effortless.
-
-
-## Privacy Policy
-Ai Image Alt Text Generator for WP uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us to troubleshoot problems faster & make product improvements.
-
-Appsero SDK **does not gather any data by default.** The SDK only starts gathering basic telemetry data **when a user allows it via the admin notice**. We collect the data to ensure a great user experience for all our users.
-
-Integrating Appsero SDK **DOES NOT IMMEDIATELY** start gathering data, **without confirmation from users in any case.**
-
-Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
 
 ### 🚀 Check out our Other Products 🚀
 
@@ -95,7 +85,7 @@ Here are some of our amazing plugins that you can use to boost your WordPress we
 
 == Support ==
 
-If you have any questions, please email us at **[contact@boomdevs.com](mailto:contact@boomdevs.com)**
+If you have any questions, please email us at **[contact@wpmessiah.com](mailto:contact@wpmessiah.com)**
 
 == Screenshots ==
 

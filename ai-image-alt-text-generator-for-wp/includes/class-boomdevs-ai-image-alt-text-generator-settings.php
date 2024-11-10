@@ -72,8 +72,8 @@
 				 */
 				$options_panel_config = array(
 					'framework_title' => __('Ai Image Alt Text Generator for WP', 'swiss-toolkit-for-wp'),
-					'footer_text'     => sprintf('Our Alt Text Generator documentation can help you get started <a href="%s">documentation</a>', esc_url('https://boomdevs.com/docs/')),
-					'footer_credit'   => sprintf('A proud creation of <a href="%s">BoomDevs</a>', esc_url('https://boomdevs.com/')),
+					'footer_text'     => sprintf('Our Alt Text Generator documentation can help you get started <a href="%s">documentation</a>', esc_url('https://wpmessiah.com/docs/')),
+					'footer_credit'   => sprintf('A proud creation of <a href="%s">BoomDevs</a>', esc_url('https://wpmessiah.com/')),
 					'menu_title'      => esc_html__('Alt Text Generator', 'ai-image-alt-text-generator-for-wp'),
 					'menu_icon'       => BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/plugin-logo.svg',
 					'menu_slug'       => 'boomdevs-ai-image-alt-text-generator-settings',

@@ -28,6 +28,15 @@
 			'/admin.php?page=boomdevs-ai-image-alt-text-generator-settings',
 			''
 		);
+
+        add_submenu_page(
+			'ai-alt-text-generator', // Parent slug
+			esc_html('History', 'ai-image-alt-text-generator-for-wp'),
+			__('History', 'ai-image-alt-text-generator-for-wp'),
+			'manage_options',
+			'/admin.php?page=boomdevs-ai-image-alt-text-generator-history',
+			'render_generated_image_alt'
+		);
 	}
 
 	add_action('admin_menu', 'boomdevs_alt_text_gen_custom_menu');
@@ -102,6 +111,8 @@
                      
                      $api_key = '';
 
+                     var_dump($settings);
+
                      if(isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] !== ''){
                         $api_key = $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'];
                      }
@@ -120,6 +131,8 @@
              
                      $response_body = wp_remote_retrieve_body($response);
                      $decoded_response = json_decode($response_body);
+
+                     var_dump($decoded_response);
 
                     if((isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] === '') || !$decoded_response->data->available_token): ?>
                         <div class="overlay_for_plan">
@@ -190,6 +203,24 @@
 		<?php
 
 	}
+
+    function render_generated_image_alt() {
+        require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-custom-table.php';
+        // Create an instance of our package class
+        $Books_List_Table = new Books_List_Table();
+        // Fetch, prepare, sort, and filter our data
+        $Books_List_Table->prepare_items();
+    ?>
+
+    <div class="wrap">
+        <h2>My Custom List Table</h2>
+        <form method="get">
+            <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+            <?php $Books_List_Table->display() ?>
+        </form>
+    </div>
+    <?php
+    }
 
 	function bdaiatg_user()
 	{

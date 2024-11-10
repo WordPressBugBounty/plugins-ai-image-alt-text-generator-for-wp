@@ -1,0 +1,7 @@
+[
+    {"title": "The Great Novel", "author": "John Doe", "genre": "Fiction", "year": 2005},
+    {"title": "History of the World", "author": "Jane Doe", "genre": "History", "year": 2010},
+    {
+        "image": 6, "alttext": "Test", "date": "24-07-24"
+    }
+]

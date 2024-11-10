@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://boomdevs.com
+ * @link       https://wpmessiah.com
  * @since      1.0.0
  *
  * @package    Boomdevs_Ai_Image_Alt_Text_Generator
@@ -70,7 +70,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator {
 		if ( defined( 'BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION' ) ) {
 			$this->version = BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION;
 		} else {
-			$this->version = '1.0.1';
+			$this->version = '1.0.2';
 		}
 		$this->plugin_name = 'ai-image-alt-text-generator-for-wp';
 
