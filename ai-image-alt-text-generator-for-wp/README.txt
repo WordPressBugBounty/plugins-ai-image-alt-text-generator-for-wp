@@ -3,7 +3,7 @@ Contributors: boomdevs, wpmessiah
 Tags: Alternative Text, image alt text
 Requires at least: 5.0
 Tested up to: 6.6.2
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -124,3 +124,6 @@ Simply install the plugin and let it automatically generate alt text for your im
 == Changelog ==
 = 1.0.1 - 11 May 2024 =
 Added all Gutenberg single-image-to-text generator with bulk image-to-text generator.
+
+= 1.0.3 - 11 November 2024 =
+Fix some minor issues

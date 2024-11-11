@@ -1,2 +1,5 @@
 = 1.0.1 - 11 May 2024 =
 Added all Gutenberg single-image-to-text generator with bulk image-to-text generator.
+
+= 1.0.3 - 11 November 2024 =
+Fix some minor issues
