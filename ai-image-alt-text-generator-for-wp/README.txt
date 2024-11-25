@@ -2,7 +2,7 @@
 Contributors: boomdevs, wpmessiah
 Tags: Alternative Text, image alt text
 Requires at least: 5.0
-Tested up to: 6.6.2
+Tested up to: 6.7
 Stable tag: 1.0.3
 Requires PHP: 7.0
 License: GPLv2 or later
@@ -12,10 +12,12 @@ Effortlessly generate descriptive alt text for images using AI within your WordP
 
 == Description ==
 
+[youtube https://youtu.be/qRIGYM33E3U]
+
 Introducing the **AI Alt Text Generator for WordPress** – your ultimate solution for effortless Image Alt text Generator for image SEO. Our simple plugin is designed to revolutionize your alt text generation process with the help of AI.
 
 
-[youtube https://youtu.be/eeKZiQ08uY8]
+[youtube https://youtu.be/MFw9Ghr3uM4]
 
 With the **AI Alt Text Generator**, you can say goodbye to manual Image alt text entry. We're automating alt text generation upon image upload, saving you time and effort. No matter how many images you have, our plugin can handle bulk alt text generation, making sure all your images are properly SEO optimized with perfect alt text, title and description.
 
@@ -82,6 +84,8 @@ Here are some of our amazing plugins that you can use to boost your WordPress we
 
 [🔳 Unlimited Elementor Inner Sections 🔳](https://wordpress.org/plugins/unlimited-elementor-inner-sections-by-boomdevs/): Unlock the full potential of Elementor with unlimited inner sections. Now, you can create and customize as many inner sections as you desire, giving you complete design freedom.
 
+== Tutorial ==
+[youtube https://youtu.be/eeKZiQ08uY8]
 
 == Support ==
 
