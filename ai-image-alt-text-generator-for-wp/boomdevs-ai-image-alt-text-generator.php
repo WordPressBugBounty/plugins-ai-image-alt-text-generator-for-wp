@@ -10,14 +10,15 @@ require __DIR__ . '/vendor/autoload.php';
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
+ * @link              https://wpmessiah.com/
  * @since             1.0.0
  * @package           Boomdevs_Ai_Image_Alt_Text_Generator
  *
  * @wordpress-plugin
  * Plugin Name:       Ai Image Alt Text Generator for WP
- * Plugin URI:        https://aialttext.boomdevs.com/
+ * Plugin URI:        https://aialttextgenerator.com/
  * Description:       Effortlessly generate descriptive alt text for images using AI within your WordPress website.
- * Version:           1.0.3
+ * Version:           1.0.4
  * Author:            WP Messiah
  * Author URI:        https://wpmessiah.com/
  * License:           GPL-2.0+
@@ -129,7 +130,7 @@ appsero_init_tracker_ai_image_alt_text_generator_for_wp();
     function validate_api_key( $value ) {
         return esc_html__( 'This api key is not valid!', 'csf' );
         $api_key = $value;
-        $url = 'https://aialttext.boomdevs.com/wp-json/alt-text-generator/v1/available-token';
+        $url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/available-token';
 		$body_data = array(
 			'token' => $api_key,
 		);

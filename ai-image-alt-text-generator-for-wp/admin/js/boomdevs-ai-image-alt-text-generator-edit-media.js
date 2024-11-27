@@ -33,7 +33,7 @@
 			'image_prefix': image_prefix,
 		}
 
-		const response = await fetch('https://aialttext.boomdevs.com/wp-json/alt-text-generator/v1/get-alt-text', {
+		const response = await fetch('https://aialttextgenerator.com/wp-json/alt-text-generator/v1/get-alt-text', {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
@@ -76,7 +76,7 @@
 	}
 
 	async function checkAvailableToken() {
-		const response = await fetch('https://aialttext.boomdevs.com/wp-json/alt-text-generator/v1/available-token', {
+		const response = await fetch('https://aialttextgenerator.com/wp-json/alt-text-generator/v1/available-token', {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
@@ -374,7 +374,7 @@
 		const button = document.getElementById('generate_alt_text');
 
 		try {
-			const response = await fetch('/wp-json/alt-text-generator/v1/fetch-jobs');
+			const response = await fetch('https://aialttextgenerator.com/wp-json/alt-text-generator/v1/fetch-jobs');
 			const response_json = await response.json();
 
 			const bulk_alt_text_progress = document.getElementById('bulk_alt_text_progress');

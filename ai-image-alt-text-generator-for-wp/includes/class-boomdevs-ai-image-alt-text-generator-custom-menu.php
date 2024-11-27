@@ -28,6 +28,15 @@
 			'/admin.php?page=boomdevs-ai-image-alt-text-generator-settings',
 			''
 		);
+
+        add_submenu_page(
+			'ai-alt-text-generator', // Parent slug
+			esc_html('History', 'ai-image-alt-text-generator-for-wp'),
+			__('History', 'ai-image-alt-text-generator-for-wp'),
+			'manage_options',
+			'/admin.php?page=boomdevs-ai-image-alt-text-generator-history',
+			'render_generated_image_alt'
+		);
 	}
 
 	add_action('admin_menu', 'boomdevs_alt_text_gen_custom_menu');
@@ -106,9 +115,7 @@
                         $api_key = $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'];
                      }
 
-                    // var_dump($api_key);
-
-                     $url = 'https://aialttext.boomdevs.com/wp-json/alt-text-generator/v1/available-token';
+                     $url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/available-token';
              
                      $args = array(
                          'headers' => array(
@@ -123,7 +130,7 @@
 
                     if((isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] === '') || !$decoded_response->data->available_token): ?>
                         <div class="overlay_for_plan">
-                            You don't have any plan please<a style="margin-left: 5px; display: inline-block; margin-top: 10px" href="https://aialttext.boomdevs.com/register/" target="_blank"><b>Get Started for Free</b></a>.
+                            You don't have any plan please<a style="margin-left: 5px; display: inline-block; margin-top: 10px" href="https://aialttextgenerator.com/register/" target="_blank"><b>Get Started for Free</b></a>.
                         </div>
                     <?php endif; ?>
                 </div>
@@ -131,10 +138,10 @@
             <div class="baiatgd_plan_notice">
             <span class="notice_text">
 		        <?php if((isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] === '') || !$decoded_response->data->available_token): ?>
-                    You don't have any plan please<a style="margin-left: 5px; display: inline-block" href="https://aialttext.boomdevs.com/register/" target="_blank">Get Started for Free</a>.
+                    You don't have any plan please<a style="margin-left: 5px; display: inline-block" href="https://aialttextgenerator.com/register/" target="_blank">Get Started for Free</a>.
 		        <?php else: ?>
                     You are on the <span id="subscription_plan">Free plan</span> with <span id="remaining_credit">0</span> credits remaining.
-                    <a href="https://aialttext.boomdevs.com/pricing/" target="_blank">Purchase more credits</a>
+                    <a href="https://aialttextgenerator.com/pricing/" target="_blank">Purchase more credits</a>
                     to keep going!
                 <?php endif; ?>
             </span>
@@ -190,6 +197,24 @@
 		<?php
 
 	}
+
+    function render_generated_image_alt() {
+        require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-custom-table.php';
+        // Create an instance of our package class
+        $Books_List_Table = new Books_List_Table();
+        // Fetch, prepare, sort, and filter our data
+        $Books_List_Table->prepare_items();
+    ?>
+
+    <div class="wrap">
+        <h2>My Custom List Table</h2>
+        <form method="get">
+            <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
+            <?php $Books_List_Table->display() ?>
+        </form>
+    </div>
+    <?php
+    }
 
 	function bdaiatg_user()
 	{

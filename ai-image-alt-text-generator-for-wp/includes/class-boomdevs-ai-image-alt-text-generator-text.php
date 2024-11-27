@@ -184,7 +184,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
                 'token' => $api_key,
             );
 
-            $url = 'https://aialttext.boomdevs.com/wp-json/alt-text-generator/v1/get-alt-text';
+            $url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/get-alt-text';
             $arguments = [
                 'method' => 'POST',
                 'headers' => $headers,
@@ -318,7 +318,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
             'token' => $api_key,
         );
 
-        $url = 'https://aialttext.boomdevs.com/wp-json/alt-text-generator/v1/get-alt-text';
+        $url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/get-alt-text';
         $arguments = [
             'method' => 'POST',
             'headers' => $headers,
@@ -393,7 +393,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
                 'token' => $api_key,
             );
 
-            $url = 'https://aialttext.boomdevs.com/wp-json/alt-text-generator/v1/get-alt-text';
+            $url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/get-alt-text';
             $arguments = [
                 'method' => 'POST',
                 'headers' => $headers,

@@ -137,7 +137,7 @@
 									'id'    => 'bdaiatg_api_key',
 									'type'  => 'text',
 									'validate' => 'validate_bdaiatg_api_key',
-									'after' => '<a href="https://aialttext.boomdevs.com/register/" target="_blank">Manage your account</a> and additional settings.'
+									'after' => '<a href="https://aialttextgenerator.com/register/" target="_blank">Manage your account</a> and additional settings.'
 								),
 							),
 						),

@@ -42,7 +42,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 		$no_credit = get_option('error_during_background_task_no_credit');
 		if($no_credit) {
 			wp_send_json_error(array(
-				'message' => 'You have not enough credit to generate image alt text please buy credit from here <a href="https://aialttext.boomdevs.com/">Buy now</a>',
+				'message' => 'You have not enough credit to generate image alt text please buy credit from here <a href="https://aialttextgenerator.com/pricing">Buy now</a>',
 			));
 		}
 	}
@@ -67,7 +67,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
     }
 
 	public function check_available_token($api_key) {
-		$url = 'https://aialttext.boomdevs.com/wp-json/alt-text-generator/v1/available-token';
+		$url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/available-token';
 		$body_data = array(
 			'token' => $api_key,
 		);
@@ -228,7 +228,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
             'token' => $api_key,
         );
 
-        $url = 'https://aialttext.boomdevs.com/wp-json/alt-text-generator/v1/get-alt-text';
+        $url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/get-alt-text';
         $arguments = [
             'method' => 'POST',
             'headers' => $headers,
