@@ -157,7 +157,7 @@ if ( ! class_exists( 'CSF_Field_typography' ) ) {
             echo '<div class="csf--block csf--block-subset hidden">';
             echo '<div class="csf--title">'. esc_html__( 'Subset', 'csf' ) .'</div>';
             $subset = ( is_array( $this->value['subset'] ) ) ? $this->value['subset'] : array_filter( (array) $this->value['subset'] );
-            echo $this->create_select( esc_attr($subset), 'subset', esc_html__( 'Default', 'csf' ), esc_attr($args['multi_subset']) );
+            echo $this->create_select( $subset, 'subset', esc_html__( 'Default', 'csf' ), $args['multi_subset'] );
             echo '</div>';
           }
 

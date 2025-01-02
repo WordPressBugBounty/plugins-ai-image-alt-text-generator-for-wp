@@ -18,7 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
  * Plugin Name:       Ai Image Alt Text Generator for WP
  * Plugin URI:        https://aialttextgenerator.com/
  * Description:       Effortlessly generate descriptive alt text for images using AI within your WordPress website.
- * Version:           1.0.4
+ * Version:           1.0.5
  * Author:            WP Messiah
  * Author URI:        https://wpmessiah.com/
  * License:           GPL-2.0+
@@ -81,17 +81,13 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-boomdevs-ai-image-alt-text
  *
  * @since    1.0.0
  */
-function boomdevs_ai_image_alt_text_generator_run() {
-
-    function BDAIATG_run_ai_image_alt_text_generator()
-    {
-        $plugin = new Boomdevs_Ai_Image_Alt_Text_Generator();
-        $plugin->run();
-    }
-
-    add_action('plugins_loaded', 'BDAIATG_run_ai_image_alt_text_generator', 2);
+function boomdevs_ai_image_alt_text_generator_run(){
+    $plugin = new Boomdevs_Ai_Image_Alt_Text_Generator();
+    $plugin->run();
 }
-boomdevs_ai_image_alt_text_generator_run();
+
+// Use a higher priority to ensure all dependencies are loaded.
+add_action('plugins_loaded', 'boomdevs_ai_image_alt_text_generator_run', 2);
 
 
 
@@ -113,7 +109,7 @@ function appsero_init_tracker_ai_image_alt_text_generator_for_wp() {
 
 }
 
-appsero_init_tracker_ai_image_alt_text_generator_for_wp();
+add_action('init', 'appsero_init_tracker_ai_image_alt_text_generator_for_wp');
 
 
 /**

@@ -35,7 +35,7 @@ if ( ! class_exists( 'CSF_Field_checkbox' ) ) {
 
         if ( is_array( $options ) && ! empty( $options ) ) {
 
-          echo '<ul'. esc_attr( $inline_class ) .'>';
+          echo '<ul'. $inline_class .'>';
 
           foreach ( $options as $option_key => $option_value ) {
 
@@ -86,7 +86,7 @@ if ( ! class_exists( 'CSF_Field_checkbox' ) ) {
       } else {
 
         echo '<label class="csf-checkbox">';
-        echo '<input type="checkbox" name="'. esc_attr( $this->field_name() ) .'" value="'. esc_attr($this->value) .'" class="csf--input"'. $this->field_attributes() .'/>';
+        echo '<input type="hidden" name="'. esc_attr( $this->field_name() ) .'" value="'. $this->value .'" class="csf--input"'. $this->field_attributes() .'/>';
         echo '<input type="checkbox" name="_pseudo" class="csf--checkbox"'. esc_attr( checked( $this->value, 1, false ) ) . $this->field_attributes() .'/>';
         echo ( ! empty( $this->field['label'] ) ) ? '<span class="csf--text">'. esc_attr( $this->field['label'] ) .'</span>' : '';
         echo '</label>';

@@ -42,7 +42,6 @@ if ( ! class_exists( 'CSF_Field_palette' ) ) {
           }
 
           echo '<input type="radio" name="'. esc_attr( $this->field_name() ) .'" value="'. esc_attr( $key ) .'"'. $this->field_attributes() . esc_attr( $checked ) .'/>';
-
           echo '</div>';
 
         }

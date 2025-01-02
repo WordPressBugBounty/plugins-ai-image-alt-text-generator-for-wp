@@ -237,7 +237,7 @@ if ( ! class_exists( 'CSF_Shortcoder' ) ) {
 
             echo '</div>';
 
-            echo '<div class="csf--repeat-button-block"><a class="button csf--repeat-button" href="#"><i class="fas fa-plus-circle"></i> '. htmlspecialchars($button_title, ENT_QUOTES, 'UTF-8') .'</a></div>';
+            echo '<div class="csf--repeat-button-block"><a class="button csf--repeat-button" href="#"><i class="fas fa-plus-circle"></i> '. $button_title .'</a></div>';
 
           }
 

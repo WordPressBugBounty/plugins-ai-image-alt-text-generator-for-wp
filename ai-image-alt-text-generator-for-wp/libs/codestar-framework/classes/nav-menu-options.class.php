@@ -156,7 +156,7 @@ if ( ! class_exists( 'CSF_Nav_Menu_Options' ) ) {
 
       // XSS ok.
       // No worries, This "POST" requests is sanitizing in the below foreach.
-      $request = ( ! empty( $_POST[ $this->unique ][ $menu_item_db_id ] ) ) ? sanitize_text_field($_POST[ $this->unique ][ $menu_item_db_id ]) : array();
+      $request = ( ! empty( $_POST[ $this->unique ][ $menu_item_db_id ] ) ) ? $_POST[ $this->unique ][ $menu_item_db_id ] : array();
 
       if ( ! empty( $request ) ) {
 

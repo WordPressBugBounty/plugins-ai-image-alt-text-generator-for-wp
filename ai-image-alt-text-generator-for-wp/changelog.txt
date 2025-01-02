@@ -6,3 +6,6 @@ Fix some minor bugs
 
 = 1.0.4 - 27 November 2024 =
 Fix some minor bugs
+
+= 1.0.5 - 02 January 2025 =
+Fixed text domain loading issues and minor bugs.

@@ -34,7 +34,7 @@ if ( ! class_exists( 'CSF_Field_link' ) ) {
 
       $maybe_hidden = ( empty( $hidden ) ) ? ' hidden' : '';
 
-      echo esc_html($this->field_before());
+      echo $this->field_before();
 
       echo '<textarea readonly="readonly" class="csf--link hidden"></textarea>';
 
