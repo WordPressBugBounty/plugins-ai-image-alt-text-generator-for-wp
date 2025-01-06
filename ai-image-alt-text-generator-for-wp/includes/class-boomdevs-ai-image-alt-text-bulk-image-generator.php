@@ -56,9 +56,9 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 		}
 
 		$all_jobs = get_option('altgen_attachments_jobs');
-		wp_send_json_success( array(
-			'data' => count($all_jobs),
-		), 200 );
+        wp_send_json_success( array(
+            'data' => is_array($all_jobs) ? count($all_jobs) : 0,
+        ), 200 );
 	}
 
     public function cancel_bulk_alt_image_generator() {

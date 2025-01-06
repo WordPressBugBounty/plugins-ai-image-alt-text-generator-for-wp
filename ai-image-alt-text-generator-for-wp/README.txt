@@ -3,7 +3,7 @@ Contributors: boomdevs, wpmessiah
 Tags: Alternative Text, image alt text
 Requires at least: 5.0
 Tested up to: 6.7
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -133,3 +133,6 @@ Fix some minor bugs
 
 = 1.0.5 - 02 January 2025 =
 Fixed text domain loading issues and minor bugs.
+
+= 1.0.6 - 06 January 2025 =
+Fixed some minor issues

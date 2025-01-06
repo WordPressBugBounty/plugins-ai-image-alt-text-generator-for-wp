@@ -243,24 +243,24 @@
 
 	// Get all jobs list if default localize jobs not found
 	function getJobsLists() {
-		jQuery.ajax({
-			type: 'post',
-			dataType: 'json',
-			url: import_csv.ajaxurl,
-			data: {
-				action: "get_all_added_jobs",
-				nonce: import_csv.nonce,
-			},
-			success: function(response) {
-				$('.baiatgd_bulk_progress_card').css({
-					display: 'block',
-				});
+        jQuery.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: import_csv.ajaxurl,
+            data: {
+                action: "get_all_added_jobs",
+                nonce: import_csv.nonce,
+            },
+            success: function(response) {
+                $('.baiatgd_bulk_progress_card').css({
+                    display: 'block',
+                });
 
-				fetchGenerateJobs();
-				buttonStatusDisableSet();
-			}
-		})
-	}
+                fetchGenerateJobs();
+                buttonStatusDisableSet();
+            }
+        })
+    }
 
 	// Plan token
 	async function plan_credit() {
@@ -398,7 +398,6 @@
 
 					plan_credit();
 					hideProgressBar();
-					buttonStatusEnableSet();
 
 					$.toast({
 						heading: 'Success',
@@ -429,101 +428,100 @@
 	}
 
 	function buttonStatusDisableSet() {
-		$('.bd_aitgen_loader').css("visibility", "visible");
-		generateAllTextButton.disabled = true;
-	}
+        $('.generate_alt_text_btn_loader').css("display", "none");
+    }
 
-	function buttonStatusEnableSet() {
-		$('.bd_aitgen_loader').css("visibility", "hidden");
-		generateAllTextButton.disabled = false;
-	}
+    function buttonStatusEnableSet() {
+        $('.generate_alt_text_btn_loader').css("display", "block");
+    }
 
 	function showProgressBar() {
-		if(import_csv.has_jobs_list !== '0') {
-			$('.baiatgd_bulk_progress_card').css({
-				display: 'block',
-			});
-			fetchGenerateJobs();
-			buttonStatusDisableSet();
-		}
-	}
+        if(import_csv.has_jobs_list !== '0') {
+            $('.baiatgd_bulk_progress_card').css({
+                display: 'block',
+            });
+            fetchGenerateJobs();
+            buttonStatusDisableSet();
+        }
+    }
 
 	showProgressBar();
 
 	function hideProgressBar() {
-		$('.baiatgd_bulk_progress_card').css({
-			display: 'none',
-		});
-	}
+        $('.baiatgd_bulk_progress_card').css({
+            display: 'none',
+        });
+    }
 
 	// showProgressBar();
 
 	$(document).on('click', '#generate_alt_text', function() {
-		buttonStatusDisableSet();
+        buttonStatusEnableSet();
 
-		if(import_csv.api_key === '') {
-			buttonStatusEnableSet();
-			showWarning('Please set api key from settings menu.');
-			return false;
-		}
+        if(import_csv.api_key === '') {
+            buttonStatusDisableSet();
+            showWarning('Please set api key from settings menu.');
+            return false;
+        }
 
-		if(apiKeyInvalid) {
-			buttonStatusEnableSet();
-			showWarning('Invalid api key please contact with support.');
-			return false;
-		}
+        if(apiKeyInvalid) {
+            buttonStatusDisableSet();
+            showWarning('Invalid api key please contact with support.');
+            return false;
+        }
 
-		if(availableToken === 0) {
-			buttonStatusEnableSet();
-			showWarning("You don't have sufficient credit please purchases more and try again letter");
-			return false;
-		}
+        if(availableToken === 0) {
+            showWarning("You don't have sufficient credit please purchases more and try again letter");
+            buttonStatusDisableSet();
+            return false;
+        }
 
-		if(creditZero === 0) {
-			buttonStatusEnableSet();
-			showWarning("You don't have sufficient credit please purchases more and try again letter");
-			return false;
-		}
+        if(creditZero === 0) {
+            showWarning("You don't have sufficient credit please purchases more and try again letter");
+            buttonStatusDisableSet();
+            return false;
+        }
 
 		jQuery.ajax({
-			type: 'post',
-			dataType: 'json',
-			url: import_csv.ajaxurl,
-			data: {
-				action: "bulk_alt_image_generator",
-				nonce: import_csv.nonce,
-				overrite_existing_images: overrite_existing_images ? overrite_existing_images : false,
-			},
-			success: function(response) {
-				console.log(response)
-				if(!response.success) {
-					if(response.data.message) {
-						$.toast({
-							heading: 'Warning',
-							text: response.data.message,
-							showHideTransition: 'fade',
-							bgColor: '#DD6B20',
-							loader: false,
-							icon: 'warning',
-							allowToastClose: false,
-							position: {
-								right: 80,
-								top: 60
-							},
-						})
-					}
-					buttonStatusEnableSet();
-				} else {
-					if(parseInt(import_csv.has_jobs_list) === 0) {
-						getJobsLists();
-					}
-				}
-			},
-			error: function (error) {
-				console.log(error);
-			}
-		});
-	});
+            type: 'post',
+            dataType: 'json',
+            url: import_csv.ajaxurl,
+            data: {
+                action: "bulk_alt_image_generator",
+                nonce: import_csv.nonce,
+                overrite_existing_images: overrite_existing_images ? overrite_existing_images : false,
+            },
+            success: function(response) {
+                if(!response.success) {
+                    if(response.data.message) {
+                        $.toast({
+                            heading: 'Warning',
+                            text: response.data.message,
+                            showHideTransition: 'fade',
+                            bgColor: '#DD6B20',
+                            loader: false,
+                            icon: 'warning',
+                            allowToastClose: false,
+                            position: {
+                                right: 80,
+                                top: 60
+                            },
+                        });
+
+                        buttonStatusDisableSet();
+                    }
+                } else {
+                    if(parseInt(import_csv.has_jobs_list) === 0) {
+                        buttonStatusDisableSet();
+                        getJobsLists();
+                    }
+                }
+            },
+            error: function (error) {
+                buttonStatusDisableSet();
+            }
+        });
+    });
 
 	// function check_no_credit() {
 	// 	jQuery.ajax({

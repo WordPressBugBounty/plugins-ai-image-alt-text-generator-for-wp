@@ -160,10 +160,10 @@
                 </div>
                 <div class="baiatgd_bulk_smush_btn_wrapper">
                     <div class="generate_button_wrap">
-                        <button type="button" id="generate_alt_text" class="baiatgd_generate_btn">Generate Alt Text</button>
-                        <div class="bd_aitgen_loader">
-                            <div class="bd_aitgen_loader_innerwrap"></div>
-                        </div>
+                        <div class="generate_alt_text_btn_loader"></div>
+                        <button type="button" id="generate_alt_text" class="baiatgd_generate_btn">
+                            Generate Alt Text
+                        </button>
                     </div>
                     <div>
                         <label for="bdaiatg_bulk_generate_all" class="generate_checkbox_wrapper">
