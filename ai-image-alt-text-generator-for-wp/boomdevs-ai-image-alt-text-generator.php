@@ -18,7 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
  * Plugin Name:       Ai Image Alt Text Generator for WP
  * Plugin URI:        https://aialttextgenerator.com/
  * Description:       Effortlessly generate descriptive alt text for images using AI within your WordPress website.
- * Version:           1.0.6
+ * Version:           1.0.7
  * Author:            WP Messiah
  * Author URI:        https://wpmessiah.com/
  * License:           GPL-2.0+
@@ -37,7 +37,7 @@ if (!defined('ABSPATH')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.0.6');
+define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.0.7');
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_PATH', plugin_dir_path(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL', plugin_dir_url(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_NAME', 'ai-image-alt-text-generator-for-wp');
@@ -124,7 +124,7 @@ add_action('init', 'appsero_init_tracker_ai_image_alt_text_generator_for_wp');
 
  if( ! function_exists( 'validate_api_key' ) ) {
     function validate_api_key( $value ) {
-        return esc_html__( 'This api key is not valid!', 'csf' );
+        return esc_html__( 'This api key is not valid!', 'ai-image-alt-text-generator-for-wp' );
         $api_key = $value;
         $url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/available-token';
 		$body_data = array(
@@ -135,7 +135,7 @@ add_action('init', 'appsero_init_tracker_ai_image_alt_text_generator_for_wp');
 			'headers' => array(
 				'Content-Type' => 'application/json',
 			),
-			'body' => json_encode($body_data),
+			'body' => wp_json_encode($body_data),
 		);
 
 		$response = wp_remote_post($url, $args);
@@ -145,7 +145,7 @@ add_action('init', 'appsero_init_tracker_ai_image_alt_text_generator_for_wp');
         $decoded_response = json_decode($response_body);
 
 		if (!$decoded_response->data->available_token) {
-			return esc_html__( 'This api key is not valid!', 'csf' );
+			return esc_html__( 'This api key is not valid!', 'ai-image-alt-text-generator-for-wp' );
 		}
     }
 }

@@ -12,7 +12,7 @@
 
 		add_menu_page(
 			esc_html('Ai Alt Text Generator', 'ai-image-alt-text-generator-for-wp'),
-			'Ai Alt Text Generator',
+            esc_html('Ai Alt Text Generator', 'ai-image-alt-text-generator-for-wp'),
 			'manage_options',
 			'ai-alt-text-generator',
 			'boomdevs_alt_text_menu_content',
@@ -27,15 +27,6 @@
 			'manage_options',
 			'/admin.php?page=boomdevs-ai-image-alt-text-generator-settings',
 			''
-		);
-
-        add_submenu_page(
-			'ai-alt-text-generator', // Parent slug
-			esc_html('History', 'ai-image-alt-text-generator-for-wp'),
-			__('History', 'ai-image-alt-text-generator-for-wp'),
-			'manage_options',
-			'/admin.php?page=boomdevs-ai-image-alt-text-generator-history',
-			'render_generated_image_alt'
 		);
 	}
 
@@ -52,55 +43,55 @@
             <div class="baiatgd_cards">
                 <div class="baiatgd_single_card">
                     <div class="baiatgd_card_img_wrapper">
-                        <img src="<?php echo BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/gallery.png' ?>"
-                             class="baiatgd_card_img" alt="bulk-generate">
+                        <img src="<?php echo esc_url( BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/gallery.png' ); ?>"
+                            class="baiatgd_card_img" alt="bulk-generate">
                     </div>
                     <div class="baiatgd_card_content">
-                    <span class="content_text">
-                        Images in your library
-                    </span>
+                        <span class="content_text">
+                            <?php esc_html_e( 'Images in your library', 'ai-image-alt-text-generator-for-wp' ); ?>
+                        </span>
                         <span class="content_number">
-                        <?php echo BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$all_images; ?>
-                    </span>
+                            <?php echo esc_html( BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$all_images ); ?>
+                        </span>
                     </div>
                 </div>
                 <div class="baiatgd_single_card">
                     <div class="baiatgd_card_img_wrapper">
-                        <img src="<?php echo BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/gallery-remove.png' ?>"
+                        <img src="<?php echo esc_url( BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/gallery-remove.png'); ?>"
                              class="baiatgd_card_img" alt="bulk-generate">
                     </div>
                     <div class="baiatgd_card_content">
                     <span class="content_text">
-                        Images Missing Alt Text
+                        <?php echo esc_html_e( 'Images Missing Alt Text', 'ai-image-alt-text-generator-for-wp' ); ?>
                     </span>
                         <span class="content_number">
-                        <?php echo BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$missing_alt_text_count; ?>
+                        <?php echo esc_html(BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$missing_alt_text_count); ?>
                     </span>
                     </div>
                 </div>
                 <div class="baiatgd_single_card card-3">
                     <div class="baiatgd_single_card_top">
                         <div class="baiatgd_card_img_wrapper">
-                            <img src="<?php echo BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/database.png' ?>"
-                                 class="baiatgd_card_img" alt="bulk-generate">
+                            <img src="<?php echo esc_url( BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/database.png' ); ?>"
+                                class="baiatgd_card_img" alt="bulk-generate">
                         </div>
                         <div class="baiatgd_card_content">
                             <span class="content_text">
-                                Plan Credit Usage
+                                <?php esc_html_e( 'Plan Credit Usage', 'ai-image-alt-text-generator-for-wp' ); ?>
                             </span>
                             <span class="content_number">
                                 <span id="bdaiatg_available_token_num">0</span>
-                                    /
-                                    <span id="bdaiatg_token_token_num">0</span>
+                                /
+                                <span id="bdaiatg_token_token_num">0</span>
                                 <span class="content_percent">(<span id="bdaiatg_spent_token">0</span>%)</span>
                             </span>
                         </div>
                     </div>
                     <div class="baiatgd_progress_bar_wrapper">
                         <div class="baiatgd_percentage_wrapper">
-                        <span id="bdiatgd_percent_start">
-                            <span>0%</span>
-                        </span>
+                            <span id="bdiatgd_percent_start">
+                                <span>0%</span>
+                            </span>
                             <span>100%</span>
                         </div>
                         <div class="progress-bar">
@@ -128,16 +119,18 @@
                      $response_body = wp_remote_retrieve_body($response);
                      $decoded_response = json_decode($response_body);
 
-                    if((isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] === '') || !$decoded_response->data->available_token): ?>
-                        <div class="overlay_for_plan">
-                            You don't have any plan please<a style="margin-left: 5px; display: inline-block; margin-top: 10px" href="https://aialttextgenerator.com/register/" target="_blank"><b>Get Started for Free</b></a>.
-                        </div>
-                    <?php endif; ?>
+                    if($decoded_response == NULL) {
+                        if((isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] === '')): ?>
+                            <div class="overlay_for_plan">
+                                You don't have any plan please<a style="margin-left: 5px; display: inline-block; margin-top: 10px" href="https://aialttextgenerator.com/register/" target="_blank"><b>Get Started for Free</b></a>.
+                            </div>
+                        <?php endif;
+                    } ?>
                 </div>
             </div>
             <div class="baiatgd_plan_notice">
             <span class="notice_text">
-		        <?php if((isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] === '') || !$decoded_response->data->available_token): ?>
+		        <?php if((isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] === '') || !$decoded_response): ?>
                     You don't have any plan please<a style="margin-left: 5px; display: inline-block" href="https://aialttextgenerator.com/register/" target="_blank">Get Started for Free</a>.
 		        <?php else: ?>
                     You are on the <span id="subscription_plan">Free plan</span> with <span id="remaining_credit">0</span> credits remaining.
@@ -148,14 +141,14 @@
             </div>
         </div>
         <div class="boomdevs_ai_img_alt_text_generator_bulk">
-            <h2 class="baiatgd_bulk_title">Bulk Image Alt Text Generator</h2>
+            <h2 class="baiatgd_bulk_title"><?php echo esc_html_e("Bulk Image Alt Text Generator", 'ai-image-alt-text-generator-for-wp' ); ?></h2>
             <div class="baiatgd_bulk_smush_wrapper">
                 <div class="baiatgd_bulk_smush_content">
                 <span class="baiatgd_bulk_smush_quantity">
-                    <?php echo BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$missing_alt_text_count; ?>
+                    <?php echo esc_html(BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$missing_alt_text_count); ?>
                 </span>
                     <span class="baiatgd_bulk_smush_text">
-                    <?php bdaiatg_user(); ?>, you have <?php echo BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$all_images; ?> images total in your website, and <?php echo BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$missing_alt_text_count; ?> of them have no alt text attached to them.
+                    <?php bdaiatg_user(); ?>, you have <?php echo esc_html( BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$all_images ); ?> images total on your website, and <?php echo esc_html( BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$missing_alt_text_count ); ?> of them have no alt text attached to them.
                 </span>
                 </div>
                 <div class="baiatgd_bulk_smush_btn_wrapper">
@@ -182,7 +175,7 @@
                         <span id="bulk_alt_text_progress">0%</span>
                         <div class="baiatgd_percentage_wrapper_cancel">
                             <div class="spinner-icon">
-                                <img src="<?php echo BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/spinner.gif' ?>"
+                                <img src="<?php echo esc_url( BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/spinner.gif'); ?>"
                                      alt="spinner">
                             </div>
                             <span class="baiatgd_bulk_cancal" id="cancel_bulk_alt_image_generator">Cancel</span>
@@ -198,24 +191,6 @@
 
 	}
 
-    function render_generated_image_alt() {
-        require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-custom-table.php';
-        // Create an instance of our package class
-        $Books_List_Table = new Books_List_Table();
-        // Fetch, prepare, sort, and filter our data
-        $Books_List_Table->prepare_items();
-    ?>
-
-    <div class="wrap">
-        <h2>My Custom List Table</h2>
-        <form method="get">
-            <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-            <?php $Books_List_Table->display() ?>
-        </form>
-    </div>
-    <?php
-    }
-
 	function bdaiatg_user()
 	{
 		$current_user = wp_get_current_user();
@@ -223,8 +198,8 @@
 		if ($current_user->exists()) {
 			$username = $current_user->user_login;
 			$capitalized_username = ucfirst($username);
-			echo "$capitalized_username";
+			echo esc_html( $capitalized_username );
 		} else {
-			echo "Guest";
+			echo esc_html_e( "Guest", 'ai-image-alt-text-generator-for-wp' );
 		}
 	}

@@ -47,13 +47,17 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 		}
 	}
 
+    public function verify_authorization() {
+        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce(  $_POST['nonce'], 'import_csv' ) ) {
+            wp_send_json_error( array(
+                'message' => 'Permission denied!',
+            ) );
+            return false;
+        }
+    }
+
 	public function get_total_jobs_lists() {
-		if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'import_csv')) {
-			wp_send_json_error(array(
-				'message' => "Permission denied!",
-			));
-			return false;
-		}
+		$this->verify_authorization();
 
 		$all_jobs = get_option('altgen_attachments_jobs');
         wp_send_json_success( array(
@@ -62,6 +66,8 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 	}
 
     public function cancel_bulk_alt_image_generator() {
+        $this->verify_authorization();
+
         $this->process_generate_bulk_post->cancel();
         delete_option('altgen_attachments_jobs');
     }
@@ -76,7 +82,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 			'headers' => array(
 				'Content-Type' => 'application/json',
 			),
-			'body' => json_encode($body_data),
+			'body' => wp_json_encode($body_data),
 		);
 
 		$response = wp_remote_post($url, $args);
@@ -94,12 +100,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 
     public function bulk_alt_image_generator()
     {
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'import_csv')) {
-	        wp_send_json_error(array(
-		        'message' => "Permission denied!",
-	        ));
-            return false;
-        }
+        $this->verify_authorization();
 
         $settings = BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::get_settings();
         $api_key = isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) ? $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] : '';
@@ -120,7 +121,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 		}
 
         $file_extensions = isset($settings['bdaiatg_alt_text_image_types_wrapper']['bdaiatg_alt_text_image_types']) ? $settings['bdaiatg_alt_text_image_types_wrapper']['bdaiatg_alt_text_image_types'] : '';
-        $overrite_existing_images = $_REQUEST['overrite_existing_images'];
+        $overrite_existing_images = isset($_REQUEST['overrite_existing_images']) ? $_REQUEST['overrite_existing_images']: false;
 
         $args = array(
             'post_type' => 'attachment',
@@ -133,7 +134,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
         $alt_text_attachments = array();
 
         foreach ($attachments as $attachment) {
-            $path = parse_url($attachment->guid, PHP_URL_PATH);
+            $path = wp_parse_url($attachment->guid, PHP_URL_PATH);
             $extension = pathinfo($path, PATHINFO_EXTENSION);
 
             if($file_extensions) {
@@ -232,7 +233,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
         $arguments = [
             'method' => 'POST',
             'headers' => $headers,
-            'body' => json_encode($data_send),
+            'body' => wp_json_encode($data_send),
         ];
 
         $response = wp_remote_post( $url, $arguments );

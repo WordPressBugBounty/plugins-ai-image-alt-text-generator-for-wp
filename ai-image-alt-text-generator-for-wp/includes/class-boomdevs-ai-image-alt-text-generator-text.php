@@ -37,35 +37,49 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
     }
 
     public function bdaiatg_save_alt_text() {
-        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'import_csv' ) ) {
+        // Verify nonce for security
+        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( wp_unslash( sanitize_text_field($_POST['nonce']) ), 'import_csv' ) ) {
             die( 'Permission denied!' );
         }
-
-        $attachment_id = $_REQUEST['attachment_id'];
-        $alt_text = $_REQUEST['alt_text'];
-        $image_title = $_REQUEST['image_title'];
-        $image_caption = $_REQUEST['image_caption'];
-        $image_description = $_REQUEST['image_description'];
-
-        if(isset($image_title) && $image_title === 'update_title') {
-            $post = get_post($attachment_id);
-            $post->post_title = $alt_text;
-            wp_update_post($post);
+    
+        // Sanitize inputs
+        $attachment_id      = isset( $_REQUEST['attachment_id'] ) ? absint( $_REQUEST['attachment_id'] ) : 0;
+        $alt_text           = isset( $_REQUEST['alt_text'] ) ? sanitize_text_field( $_REQUEST['alt_text'] ) : '';
+        $image_title        = isset( $_REQUEST['image_title'] ) ? sanitize_text_field( $_REQUEST['image_title'] ) : '';
+        $image_caption      = isset( $_REQUEST['image_caption'] ) ? sanitize_text_field( $_REQUEST['image_caption'] ) : '';
+        $image_description  = isset( $_REQUEST['image_description'] ) ? sanitize_textarea_field( $_REQUEST['image_description'] ) : '';
+    
+        // Update post title
+        if ( 'update_title' === $image_title && ! empty( $alt_text ) ) {
+            $post = get_post( $attachment_id );
+            if ( $post ) {
+                $post->post_title = $alt_text;
+                wp_update_post( $post );
+            }
         }
-
-        if(isset($image_caption) && $image_caption === 'update_caption') {
-            $post = get_post($attachment_id);
-            $post->post_excerpt = $alt_text;
-            wp_update_post($post);
+    
+        // Update post caption
+        if ( 'update_caption' === $image_caption && ! empty( $alt_text ) ) {
+            $post = get_post( $attachment_id );
+            if ( $post ) {
+                $post->post_excerpt = $alt_text;
+                wp_update_post( $post );
+            }
         }
-
-        if(isset($image_description) && $image_description === 'update_description') {
-            $post = get_post($attachment_id);
-            $post->post_content = $alt_text;
-            wp_update_post($post);
+    
+        // Update post description
+        if ( 'update_description' === $image_description && ! empty( $alt_text ) ) {
+            $post = get_post( $attachment_id );
+            if ( $post ) {
+                $post->post_content = $alt_text;
+                wp_update_post( $post );
+            }
         }
-
-        update_post_meta( $attachment_id, '_wp_attachment_image_alt', $alt_text );
+    
+        // Update alt text
+        if ( ! empty( $alt_text ) ) {
+            update_post_meta( $attachment_id, '_wp_attachment_image_alt', $alt_text );
+        }
     }
 
     public function bulk_alt_image_generator_gutenburg_post() {
@@ -188,7 +202,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
             $arguments = [
                 'method' => 'POST',
                 'headers' => $headers,
-                'body' => json_encode($data_send),
+                'body' => wp_json_encode($data_send),
             ];
 
             $response = wp_remote_post( $url, $arguments );
@@ -322,7 +336,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
         $arguments = [
             'method' => 'POST',
             'headers' => $headers,
-            'body' => json_encode($data_send),
+            'body' => wp_json_encode($data_send),
         ];
 
         $response = wp_remote_post( $url, $arguments );
@@ -397,7 +411,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
             $arguments = [
                 'method' => 'POST',
                 'headers' => $headers,
-                'body' => json_encode($data_send),
+                'body' => wp_json_encode($data_send),
             ];
 
             $response = wp_remote_post( $url, $arguments );

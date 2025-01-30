@@ -71,7 +71,7 @@
 				 * including panel title, menu settings, and appearance settings.
 				 */
 				$options_panel_config = array(
-					'framework_title' => __('Ai Image Alt Text Generator for WP', 'swiss-toolkit-for-wp'),
+					'framework_title' => __('Ai Image Alt Text Generator for WP', 'ai-image-alt-text-generator-for-wp'),
 					'footer_text'     => sprintf('Our Alt Text Generator documentation can help you get started <a href="%s">documentation</a>', esc_url('https://wpmessiah.com/docs/')),
 					'footer_credit'   => sprintf('A proud creation of <a href="%s">BoomDevs</a>', esc_url('https://wpmessiah.com/')),
 					'menu_title'      => esc_html__('Alt Text Generator', 'ai-image-alt-text-generator-for-wp'),
@@ -602,21 +602,21 @@
 									'id'         => 'bdaiatg_alt_text_image_title',
 									'type'       => 'checkbox',
 									'options'    => array(
-										'update_title' => 'Set the image title with the generated alt text.',
+										'update_title' => esc_html__('Set the image title with the generated alt text', 'ai-image-alt-text-generator-for-wp'),
 									),
 								),
 								array(
 									'id'         => 'bdaiatg_alt_text_image_caption',
 									'type'       => 'checkbox',
 									'options'    => array(
-										'update_caption' => 'Set the image caption with the generated alt text.',
+										'update_caption' => esc_html__('Set the image caption with the generated alt text.', 'ai-image-alt-text-generator-for-wp'),
 									),
 								),
 								array(
 									'id'         => 'bdaiatg_alt_text_image_description',
 									'type'       => 'checkbox',
 									'options'    => array(
-										'update_description' => 'Set the image description with the generated alt text.',
+										'update_description' => esc_html__('Set the image description with the generated alt text.', 'ai-image-alt-text-generator-for-wp'),
 									),
 								),
 								array(
@@ -641,9 +641,9 @@
 								array(
 									'id'         => 'bdaiatg_alt_text_image_generator_enable',
 									'type'       => 'checkbox',
-									'after'      => 'Note: It is ays possible to generate alt text using the Bulk Generate page or the pdate Alt Text button on an individual image.',
+									'after'      => esc_html__('Note: It is ays possible to generate alt text using the Bulk Generate page or the pdate Alt Text button on an individual image.', 'ai-image-alt-text-generator-for-wp'),
 									'options'    => array(
-										'enable' => 'Create alt text automatically when new images are uploaded.',
+										'enable' => esc_html__('Create alt text automatically when new images are uploaded.', 'ai-image-alt-text-generator-for-wp'),
 									),
 								),
 							),
@@ -658,194 +658,68 @@
 								array(
 									'id'         => 'bdaiatg_alt_text_image_types',
 									'type'       => 'text',
-									'before'      => 'Make sure that multiple extensions are separated by commas. Example: jpg,webp,png',
-									'after'      => 'The following file extensions are the only ones that will generate alt text automatically when uploading. if you want all types of images to be generated then leave it blank:',
+									'before'      => esc_html__('Make sure that multiple extensions are separated by commas. Example: jpg,webp,png', 'ai-image-alt-text-generator-for-wp'),
+									'after'      => esc_html__('The following file extensions are the only ones that will generate alt text automatically when uploading. if you want all types of images to be generated then leave it blank:', 'ai-image-alt-text-generator-for-wp'),
 								),
 							),
 						),
-
-						// Start Alt Text SEO Keywords
-//                    array(
-//                        'id'     => 'bdaiatg_alt_text_seo_wrapper',
-//                        'type'   => 'fieldset',
-//                        'title'  => 'SEO Keywords',
-//                        'fields' => array(
-//                            array(
-//                                'id'         => 'bdaiatg_alt_text_seo_keywords',
-//                                'type'       => 'checkbox',
-//                                'after'      => 'AltText.ai will intelligently integrate the focus keyphrases from the associated post. Compatible with Yoast SEO, AllInOne SEO, RankMath, SEOPress, and Squirrly SEO plugins for WordPress.',
-//                                'options'    => array(
-//                                    'keywords' => 'Automatically generate alt text with AltText.ai',
-//                                ),
-//                            ),
-//                            array(
-//                                'id'         => 'bdaiatg_alt_text_seo_keywords_title',
-//                                'type'       => 'checkbox',
-//                                'options'    => array(
-//                                    'keywords_title' => 'Use post title as keywords if SEO keywords not found from plugins.',
-//                                ),
-//                            ),
-//                        ),
-//                    ),
-
-						// Start Alt Text Chat GPT
-//                    array(
-//                        'id'     => 'bdaiatg_alt_text_prompt_wrapper',
-//                        'type'   => 'fieldset',
-//                        'title'  => 'Chat GPT:',
-//                        'fields' => array(
-//                            array(
-//                                'id'         => 'bdaiatg_alt_text_prompt',
-//                                'type'       => 'textarea',
-//                                'before'      => 'Use a ChatGPT prompt to modify any generated alt text.',
-//                                'after'      => 'Your prompt MUST include the macro {{AltText}}, which will be substituted with the generated alt text, then sent to ChatGPT.',
-//                                'placeholder' => 'example: Rewrite the following text in the style of Shakespeare: {{AltText}}',
-//                            ),
-//                        ),
-//                    ),
-
-						// Start Alt Text Bulk Processing
-//                    array(
-//                        'id'     => 'bdaiatg_alt_text_bulk_processing_wrapper',
-//                        'type'   => 'fieldset',
-//                        'title'  => 'Bulk Processing',
-//                        'fields' => array(
-//                            array(
-//                                'id'         => 'bdaiatg_alt_text_bulk_processing',
-//                                'type'       => 'checkbox',
-//                                'after'      => 'Note: You can always generate alt text using the Bulk Generate page or Update Alt Text button on an individual image.',
-//                                'options'    => array(
-//                                    'enable' => 'Always overwrite when refreshing alt text for posts/pages using the Bulk Action menu.',
-//                                ),
-//                            ),
-//                        ),
-//                    ),
-
-						// Start Alt Text Manage Account
-//                    array(
-//                        'id'     => 'bdaiatg_alt_text_manage_account_warpper',
-//                        'type'   => 'fieldset',
-//                        'title'  => 'AltGen Account',
-//                        'fields' => array(
-//                            array(
-//                                'id'         => 'bdaiatg_alt_text_manage_content',
-//                                'type'       => 'content',
-//                                'content'    => '<a href="#">Manage your account</a> and additional settings.'
-//                            ),
-//                        ),
-//                    ),
 					)
 				));
-
-//            CSF::createSection(self::$prefix, array(
-//                'parent' => $parent,
-//                'title'  => esc_html__('Bulk Generate', 'ai-image-alt-text-generator-for-wp'),
-//                'fields' => array(
-//                    array(
-//                        'type' => 'content',
-//                        'content' => $this->bulk_generate(),
-//                    ),
-//                )
-//            ));
-
-
-				// CSF::createSection(self::$prefix, array(
-				//     'parent' => $parent,
-				//     'title'  => esc_html__('Sync Library', 'ai-image-alt-text-generator-for-wp'),
-				//     'fields' => array(
-				//         array(
-				//             'type' => 'content',
-				//             'content' => $this->sync_library(),
-				//         ),
-				//     )
-				// ));
-
-				/**
-				 * Configuration settings for the WP Swiss Toolkit plugin's options panel.
-				 *
-				 * This array defines immport export configuration options for the plugin's settings panel,
-				 */
-//            CSF::createSection(self::$prefix, array(
-//                'parent' => $parent,
-//                'title'  => esc_html__('Import/Export', 'ai-image-alt-text-generator-for-wp'),
-//                'fields' => array(
-//                    array(
-//                        'type' => 'backup',
-//                        'title' => 'Export',
-//                        'subtitle' => sprintf(
-//                            esc_html__('Export your complete plugin settings via %s file.', 'ai-image-alt-text-generator-for-wp'),
-//                            '<span>' . esc_html('Downloading') . '</span>'
-//                        ),
-//                        'class' => 'swiss_export_file'
-//                    ),
-//                )
-//            ));
 			}
 
 			protected function bulk_generate() {
 				ob_start();
 				?>
                 <div class="bdaiatg_bulk_generate_wrapper">
-                    <div class="bdaiatg_bulk_generate_result">
-                        <h2>Bulk Generate Alt Text</h2>
-                        <div class="bdaiatg_bulk_generate_result_outputs">
-                            <div class="bdaiatg_bulk_generate_result_outputs_item">
-                                <div class="bdaiatg_bulk_generate_result_outputs_item_text">Total Images</div>
-                                <span><?php echo BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$all_images; ?></span>
-                            </div>
-                            <div class="bdaiatg_bulk_generate_result_outputs_item">
-                                <div class="bdaiatg_bulk_generate_result_outputs_item_text">Images Missing Alt Text</div>
-                                <span><?php echo BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$missing_alt_text_count; ?></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bdaiatg_bulk_generate_available_credits">
-                        <p>Available credits: 25 ( <a href="#">Get more credits</a> )</p>
-                    </div>
-                    <div class="bdaiatg_bulk_generate_keywords">
-                        <h2>Keywords</h2>
-                        <div class="bdaiatg_bulk_generate_keywords_options">
-                            <div class="bdaiatg_bulk_generate_keywords_options_item">
-                                <label for="keywords">
-                                    <span>[optional] SEO Keywords</span>
-                                    <span>(try to include these in the generated alt text)</span>
-                                </label>
+					<div class="bdaiatg_bulk_generate_result">
+						<h2>Bulk Generate Alt Text</h2>
+						<div class="bdaiatg_bulk_generate_result_outputs">
+							<div class="bdaiatg_bulk_generate_result_outputs_item">
+								<div class="bdaiatg_bulk_generate_result_outputs_item_text">Total Images</div>
+								<span><?php echo esc_html( BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$all_images); ?></span>
+							</div>
+							<div class="bdaiatg_bulk_generate_result_outputs_item">
+								<div class="bdaiatg_bulk_generate_result_outputs_item_text">Images Missing Alt Text</div>
+								<span><?php echo esc_html( BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$missing_alt_text_count); ?></span>
+							</div>
+						</div>
+					</div>
 
-                                <div>
-                                    <input type="text" size="60" maxlength="512" name="keywords" id="bulk-generate-keywords">
-                                </div>
-                                <!--                            <p>Separate with commas. Maximum of 6 keywords or phrases.</p>-->
-                            </div>
-                            <div class="bdaiatg_bulk_generate_keywords_options_item">
-                                <label for="negative-keywords">
-                                    <span>[optional] Negative keywords</span>
-                                    <span>(do not include these in the generated alt text)</span>
-                                </label>
-                                <div>
-                                    <input type="text" size="60" maxlength="512" name="negative-keywords" id="bulk-generate-negative-keywords">
-                                </div>
-                                <!--                            <p>Separate with commas. Maximum of 6 keywords or phrases.</p>-->
-                            </div>
-                        </div>
-                    </div>
-                    <!--                <div class="bdaiatg_bulk_generate_button">-->
-                    <!--                    <button type="button" id="generate_alt_text">Generate Alt Text</button>-->
-                    <!--                </div>-->
-                    <div class="bdaiatg_bulk_generate_options_select">
-                        <div class="bdaiatg_bulk_generate_options_select_item">
-                            <input type="checkbox" id="bdaiatg_bulk_generate_all">
-                            <label for="bdaiatg_bulk_generate_all">Include images that already have alt text (overwrite existing alt text).</label>
-                        </div>
-                        <!--                    <div class="bdaiatg_bulk_generate_options_select_item">-->
-                        <!--                        <input type="checkbox" id="bdaiatg_bulk_generate_only_attached">-->
-                        <!--                        <label for="bdaiatg_bulk_generate_only_attached">Only process images that are attached to posts.</label>-->
-                        <!--                    </div>-->
-                        <!--                    <div class="bdaiatg_bulk_generate_options_select_item">-->
-                        <!--                        <input type="checkbox" id="bdaiatg_bulk_generate_only_new">-->
-                        <!--                        <label for="bdaiatg_bulk_generate_only_new">Skip images already processed by AltText.ai</label>-->
-                        <!--                    </div>-->
-                    </div>
-                </div>
+					<div class="bdaiatg_bulk_generate_available_credits">
+						<p>Available credits: 25 ( <a href="#">Get more credits</a> )</p>
+					</div>
+
+					<div class="bdaiatg_bulk_generate_keywords">
+						<h2>Keywords</h2>
+						<div class="bdaiatg_bulk_generate_keywords_options">
+							<div class="bdaiatg_bulk_generate_keywords_options_item">
+								<label for="keywords">
+									<span>[optional] SEO Keywords</span>
+									<span>(try to include these in the generated alt text)</span>
+								</label>
+								<div>
+									<input type="text" size="60" maxlength="512" name="keywords" id="bulk-generate-keywords">
+								</div>
+							</div>
+							<div class="bdaiatg_bulk_generate_keywords_options_item">
+								<label for="negative-keywords">
+									<span>[optional] Negative keywords</span>
+									<span>(do not include these in the generated alt text)</span>
+								</label>
+								<div>
+									<input type="text" size="60" maxlength="512" name="negative-keywords" id="bulk-generate-negative-keywords">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="bdaiatg_bulk_generate_options_select">
+						<div class="bdaiatg_bulk_generate_options_select_item">
+							<input type="checkbox" id="bdaiatg_bulk_generate_all">
+							<label for="bdaiatg_bulk_generate_all">Include images that already have alt text (overwrite existing alt text).</label>
+						</div>
+					</div>
+				</div>
 				<?php
 				return ob_get_clean();
 			}
@@ -854,34 +728,8 @@
 				ob_start();
 				?>
                 <div class="bdaiatg_sync_library">
-                    <!--                <div class="bdaiatg_sync_library_top">-->
-                    <!--                    <h2>Sync Alt Text Library</h2>-->
-                    <!--                    <p>Synchronize any changes or edits from your online AltText.ai image library to WordPress. Any matching images in WordPress will be updated with the corresponding alt text from your library.</p>-->
-                    <!--                </div>-->
-                    <!--                <div class="bdaiatg_sync_library_step">-->
-                    <!--                    <p>Step 1: Export your online library</p>-->
-                    <!--                    <ul>-->
-                    <!--                        <li>Go to your AltText.ai Image Library</li>-->
-                    <!--                        <li>Click the Export button.</li>-->
-                    <!--                        <li>Start the export, then download the CSV file when it's done.</li>-->
-                    <!--                    </ul>-->
-                    <!--                </div>-->
-                    <!--                <div class="bdaiatg_sync_library_step">-->
-                    <!--                    <p>Step 2: Upload your CSV</p>-->
-                    <!--                    <div>-->
-                    <!--                        <input id="file_input" type="file" name="csv" accept=".csv" required="">-->
-                    <!--                    </div>-->
-                    <!--                    <div>-->
-                    <!--                        <input type="button" name="submit" class="wp_default_button" id="wp_default_button" value="Import">-->
-                    <!--                    </div>-->
-                    <!--                </div>-->
-                    <!--                <div class="bdaiatg_sync_library_review">-->
-                    <!--                    <h3>Do you like AltText.ai? Leave us a review!</h3>-->
-                    <!--                    <p>Help spread the word on WordPress.org. We'd really appreciate it!</p>-->
-                    <!--                    <a href="https://wordpress.org/support/plugin/alttext-ai/reviews/?filter=5" target="_blank" rel="noopenner noreferrer" class="font-medium text-indigo-600 hover:text-indigo-500">Leave your review</a>-->
-                    <!--                </div>-->
                     <div class="bdaiatg_sync_upcoming_features">
-                        <img src="<?php echo self::$plugin_file_url . 'admin/img/coming-soon-poster.jpg' ?>" alt="upcoming-img">
+                        <img src="<?php echo esc_url( self::$plugin_file_url . 'admin/img/coming-soon-poster.jpg'); ?>" alt="upcoming-img">
                     </div>
                 </div>
 				<?php
