@@ -19,6 +19,15 @@
 			$plugin_logo,
 			59
 		);
+        
+        add_submenu_page(
+            'ai-alt-text-generator', // Parent slug
+            esc_html('History', 'ai-image-alt-text-generator-for-wp'),
+            __('History', 'ai-image-alt-text-generator-for-wp'),
+            'manage_options',
+            '/edit.php?post_type=alt-history',
+            ''
+        );
 
 		add_submenu_page(
 			'ai-alt-text-generator', // Parent slug

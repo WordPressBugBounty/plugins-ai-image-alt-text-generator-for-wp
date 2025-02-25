@@ -1,9 +1,9 @@
 === Ai Image Alt Text Generator for WP ===
-Contributors: boomdevs, wpmessiah
+Contributors: wpmessiah
 Tags: Alternative Text, image alt text
 Requires at least: 5.0
 Tested up to: 6.7
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -141,3 +141,7 @@ Fixed some minor issues
 Security updates for compatibility with the latest WordPress version.
 Improved input sanitization and validation.
 Updated dependencies for enhanced security.
+
+= 1.0.8 - 25 February 2025 =
+Added History Feature – Users can now track and view past actions.
+Fixed Bull Image Issues – Resolved image display problems for better clarity.

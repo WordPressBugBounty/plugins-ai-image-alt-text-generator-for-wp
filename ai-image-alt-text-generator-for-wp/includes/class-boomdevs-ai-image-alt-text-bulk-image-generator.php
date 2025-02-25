@@ -7,6 +7,8 @@ if (!defined('ABSPATH')) {
 require_once plugin_dir_path(dirname(__FILE__)) . '/vendor/autoload.php';
 require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-image-alt-text-generator-request.php';
 require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-image-alt-text-generator-settings.php';
+require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-image-alt-text-image-generator-post-type.php';
+require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-image-alt-text-image-generator-update-history.php';
 
 class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 {
@@ -285,6 +287,12 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 
 				self::updateItemById($get_altgen_jobs, $id_to_update, $new_status);
 				update_option('altgen_attachments_jobs', $get_altgen_jobs);
+
+                
+                if ($make_obj->success !== false) {
+                    AltUpdateHistory::store($make_obj->data->generated_text, $item['url']);
+                    AltUpdateHistory::check($item['url']);
+                }
 			}
 		}
     }

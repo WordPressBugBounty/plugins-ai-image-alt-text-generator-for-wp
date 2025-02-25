@@ -17,3 +17,7 @@ Fixed some minor issues
 Security updates for compatibility with the latest WordPress version.
 Improved input sanitization and validation.
 Updated dependencies for enhanced security.
+
+= 1.0.8 - 25 February 2025 =
+Added History Feature – Users can now track and view past actions.
+Fixed Bull Image Issues – Resolved image display problems for better clarity.

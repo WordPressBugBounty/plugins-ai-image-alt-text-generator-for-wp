@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) {
 }
 
 require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-image-alt-text-generator-settings.php';
+require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-image-alt-text-image-generator-update-history.php';
 
 class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 
@@ -76,6 +77,13 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
             }
         }
     
+        // Add history tracking (Fixed)
+        $history_alt_image_url = wp_get_attachment_url($attachment_id);
+        $history_alt_text = $alt_text;
+        AltUpdateHistory::store($history_alt_text, $history_alt_image_url);
+        AltUpdateHistory::check($history_alt_image_url);
+
+
         // Update alt text
         if ( ! empty( $alt_text ) ) {
             update_post_meta( $attachment_id, '_wp_attachment_image_alt', $alt_text );
@@ -365,6 +373,13 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
         }
 
         update_post_meta( $attachment_id, '_wp_attachment_image_alt', $make_obj->data->generated_text );
+
+         // Add history tracking
+        $history_alt_image_url = $attachment;
+        $history_alt_text = $make_obj->data->generated_text;
+        AltUpdateHistory::store($history_alt_text, $history_alt_image_url);
+        AltUpdateHistory::check($history_alt_image_url);
+
 
         wp_send_json_success(array(
             'message' => 'Successfully generated alt text for this image',

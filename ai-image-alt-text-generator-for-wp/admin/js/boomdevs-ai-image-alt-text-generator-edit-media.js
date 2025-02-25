@@ -390,6 +390,8 @@
 				total_attachment_count.innerText = response_json.data.total_jobs_count;
 				attachment_generated_count.innerText = response_json.data.count_increase;
 
+
+				var bulk_job_count = document.getElementsByClassName('baiatgd_bulk_smush_quantity')[0].innerText;
 				if(response_json.data.all_status) {
 					generateAllTextButton.disabled = false;
 					generateAllTextButton.style.background = 'transparent';
@@ -401,7 +403,7 @@
 
 					$.toast({
 						heading: 'Success',
-						text: response_json.data.total_jobs_count + ' images has been successfully generated',
+				    	text: bulk_job_count + ' images alt text has been generated',
 						showHideTransition: 'fade',
 						bgColor: '#38A169',
 						loader: false,
@@ -412,6 +414,7 @@
 							top: 60
 						},
 					});
+					
 				} else {
 					setTimeout(fetchGenerateJobs, 20000);
 					generateAllTextButton.disabled = true;
