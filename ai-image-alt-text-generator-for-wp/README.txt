@@ -2,7 +2,7 @@
 Contributors: wpmessiah
 Tags: Alternative Text, image alt text
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: 1.0.8
 Requires PHP: 7.0
 License: GPLv2 or later
@@ -57,9 +57,9 @@ Customize your alt text generation to perfection. Choose the language, add uniqu
 
 [View Demo](https://aialttextgenerator.com/)
 
-[Read Documentation](https://wpmessiah.com/docs/ai-image-alt-text-generator/)
+[Read Documentation](https://docs.wpmessiah.com/docs/ai-image-alt-text-generator/)
 
-[Submit Ticket](https://wpmessiah.com/forums/forum/ai-image-alt-text-generator/)
+[Submit Ticket](https://support.wpmessiah.com/)
 
 Made with ❣️ By [WP Messiah](https://wpmessiah.com/)
 
