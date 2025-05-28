@@ -596,7 +596,7 @@
 						array(
 							'id'     => 'bdaiatg_alt_text_image_wrapper',
 							'type'   => 'fieldset',
-							'title'  => 'Image captions, titles, and descriptions',
+							'title'  => esc_html__('Image captions, titles, and descriptions', 'ai-image-alt-text-generator-for-wp'),
 							'fields' => array(
 								array(
 									'id'         => 'bdaiatg_alt_text_image_title',
@@ -649,6 +649,28 @@
 							),
 						),
 
+						array(
+							'id'          => 'bdaiatg_alt_text_length',
+							'type'        => 'select',
+							'title'       => esc_html__('Select the length of the alt text', 'ai-image-alt-text-generator-for-wp'),
+							'options'     => array(
+							  '60'  => esc_html__('Short', 'ai-image-alt-text-generator-for-wp'),
+							  '120' => esc_html__('Medium', 'ai-image-alt-text-generator-for-wp'),
+							  '160' => esc_html__('Long', 'ai-image-alt-text-generator-for-wp')
+							),
+						),
+
+						array(
+							'id'      => 'bdaiatg_alt_description',
+							'type'    => 'checkbox',
+							'title'   => esc_html__('Enable Description', 'ai-image-alt-text-generator-for-wp'),
+                            'after' => esc_html__('Note: An additional 1 credit will be deducted for each image. (Available only for Gutenberg Post, Block, and Media Editor)', 'ai-image-alt-text-generator-for-wp'),
+                            'label'   => esc_html__('Enable', 'ai-image-alt-text-generator-for-wp'),
+							'default' => false,
+							'dependency' => array(
+								'bdaiatg_alt_text_image_wrapper|bdaiatg_alt_text_image_description', '==', 'false'
+							),
+						),
 						// Start Alt Text Image Types
 						array(
 							'id'     => 'bdaiatg_alt_text_image_types_wrapper',

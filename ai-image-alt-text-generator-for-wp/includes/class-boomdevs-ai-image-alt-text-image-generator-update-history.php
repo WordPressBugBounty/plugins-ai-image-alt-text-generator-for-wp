@@ -1,70 +1,54 @@
 <?php
 
 if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+    exit;
 }
 
 class AltUpdateHistory {
-    public static function store($generated_alt, $image_url) {
-        // Generate a normalized base name by removing variation parameters
-        $base_name = self::normalizeImageUrl($image_url);
+    public static function store($args = array())
+    {
+        global $wpdb;
 
-        $existing_post = self::check($base_name, false);
+        $current_user = wp_get_current_user();
 
-        if (!$existing_post) {
-            wp_insert_post(array(
-                'post_type' => 'alt-history',
-                'post_title' => basename($base_name),
-                'post_status' => 'publish',
-                'meta_input' => array(
-                    'image_url' => $image_url,
-                    'base_name' => $base_name,
-                    'alt_text' => $generated_alt,
-                    'url_name' => $image_url,
-                    'generated_time' => current_time('mysql'),
-                    'generated_count' => 1
-                )
-            ));
-        } else {
-            $generated_count = get_post_meta($existing_post->ID, 'generated_count', true);
-            $generated_count = $generated_count ? intval($generated_count) + 1 : 1;
-            update_post_meta($existing_post->ID, 'generated_count', $generated_count);
-            update_post_meta($existing_post->ID, 'alt_text', $generated_alt);
-            update_post_meta($existing_post->ID, 'generated_time', current_time('mysql'));
-            update_post_meta($existing_post->ID, 'image_url', $image_url);
-//            update_post_meta($existing_post->ID, 'url_name', $image_url);
-        }
-    }
-
-    public static function check($base_name, $increment = false) {
-        $args = array(
-            'post_type' => 'alt-history',
-            'meta_key' => 'base_name',  // Query by normalized base name
-            'meta_value' => $base_name,
-            'posts_per_page' => 1,
+        $defaults = array(
+            'attachment_id' => '',
+            'total_count' => 1,
+            'gen_time' => current_time('mysql'),
+            'gen_by' => $current_user->ID,
         );
 
-        $existing_posts = get_posts($args);
+        $table_name = $wpdb->prefix . 'ai_alt_text_generator_history';
+        $data = wp_parse_args($args, $defaults);
 
-        if ($existing_posts) {
-            $existing_post = $existing_posts[0];
+        $existing = $wpdb->get_row($wpdb->prepare(
+            "SELECT id, total_count FROM $table_name WHERE attachment_id = %d",
+            $data['attachment_id']
+        ));
 
-            if ($increment) {
-                $generated_count = get_post_meta($existing_post->ID, 'generated_count', true);
-                $generated_count = $generated_count ? intval($generated_count) + 1 : 1;
-                update_post_meta($existing_post->ID, 'generated_count', $generated_count);
-            }
+        if ($existing) {
+            $wpdb->update(
+                $table_name,
+                array(
+                    'total_count' => $existing->total_count + 1,
+                    'gen_time' => current_time('mysql'),
+                    'gen_by' => $data['gen_by'],
+                ),
+                array('id' => $existing->id),
+                array('%d', '%s', '%s'),
+                array('%d')
+            );
 
-            return $existing_post;
+            return $existing->id;
+        } else {
+            $wpdb->insert(
+                $table_name,
+                $data,
+                array('%d', '%d', '%s', '%s')
+            );
+
+            return $wpdb->insert_id;
         }
-
-        return null;
     }
 
-    private static function normalizeImageUrl($url) {
-        // Remove any query parameters or size variations
-        $base_url = preg_replace('/\?.*/', '', $url);
-        $base_url = preg_replace('/-\d+x\d+(?=\.[a-zA-Z]+$)/', '', $base_url);
-        return $base_url;
-    }
 }

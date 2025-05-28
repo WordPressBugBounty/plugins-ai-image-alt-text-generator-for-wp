@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: Alternative Text, image alt text
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -145,3 +145,9 @@ Updated dependencies for enhanced security.
 = 1.0.8 - 25 February 2025 =
 Added History Feature – Users can now track and view past actions.
 Fixed Bull Image Issues – Resolved image display problems for better clarity.
+
+= 1.0.9 - 28 May 2025 =
+SEO Focus Keywords: Added support for RankMath SEO, Yoast SEO, and All In One SEO.
+Description Generator: New modes – Short (<60 chars), Medium (<100), Long (<130).
+Image History: Enhanced tracking, metadata, and export support.
+Fixes: UI polish & keyword detection improvements.

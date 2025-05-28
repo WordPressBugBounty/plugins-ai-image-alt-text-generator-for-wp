@@ -44,6 +44,11 @@ class BDAIATG_Ai_Image_Alt_Text_Generator_Gutenburg {
                     <input type="checkbox" id="bdaiatg-generate-button-overwrite-checkbox" data-post-bulk-generate-overwrite="">
                     <label for="bdaiatg-generate-button-overwrite-checkbox">Overwrite existing alt text</label>
                 </div>
+                <div class="bdaiatg_alt_text_gutenburg_generator_content_checkbox">
+                    <input type="checkbox" id="bdaiatg-generate-button-seo-focus-keywords-checkbox" >
+                    <label for="bdaiatg-generate-button-seo-focus-keywords-checkbox">Add SEO Focus keywords</label>
+                    <p id="empty_focus_key" style="margin-top: 10px; display: none; color: red">Focus keyword is empty! Set the SEO keyword before adding the focus keyword, save the post, reload the page, and then generate it.</p>
+                </div>
                 <!-- Uncomment if needed in the future -->
                 <!--
                 <div class="bdaiatg_alt_text_gutenburg_generator_content_checkbox">

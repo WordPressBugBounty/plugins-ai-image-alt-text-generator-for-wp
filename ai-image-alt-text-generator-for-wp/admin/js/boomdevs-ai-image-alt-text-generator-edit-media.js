@@ -7,6 +7,184 @@
 	let apiKeyInvalid = false;
 	let jobLists = 0;
 	let creditZero = 0;
+
+	let focusKeyword = '';
+
+	let postFocusKeywords = '';
+
+	$('#bdaiatg-generate-button-seo-focus-keywords-checkbox').on('change', function () {
+		if ($(this).prop('checked')) {
+			postFocusKeywords = window.import_csv.focus_keyword;
+			if (postFocusKeywords === '') {
+				$('#empty_focus_key').show();
+			}
+		} else {
+			postFocusKeywords = '';
+			$('#empty_focus_key').hide();
+		}
+	});
+
+
+	function createGenerateButton(generateButtonId, attachmentId, context) {
+		const generateUrl = new URL(window.location.href);
+		generateUrl.searchParams.set('bdaiatg_action', 'generate');
+
+		// Button wrapper
+		const button = document.createElement('div');
+		button.id = generateButtonId;
+
+		// Clickable anchor inside the wrapper for initiating the action
+		const anchor = document.createElement('a');
+		anchor.id = generateButtonId + '-anchor';
+		anchor.href = generateUrl;
+		anchor.className = 'button-secondary button-large';
+
+		// Create checkbox wrapper
+		const keywordsCheckboxWrapper = document.createElement('div');
+		keywordsCheckboxWrapper.id = generateButtonId + '-checkbox-wrapper';
+
+		// Create checkbox
+		const keywordsCheckbox = document.createElement('input');
+		keywordsCheckbox.type = 'checkbox';
+		keywordsCheckbox.id = generateButtonId + '-keywords-checkbox';
+		keywordsCheckbox.name = 'bdaiatg-generate-button-keywords-checkbox';
+
+		// Create label for checkbox
+		const keywordsCheckboxLabel = document.createElement('label');
+		keywordsCheckboxLabel.htmlFor = 'bdaiatg-generate-button-keywords-checkbox';
+		keywordsCheckboxLabel.innerText = 'Add SEO keywords';
+
+		// Create text field wrapper
+		const keywordsTextFieldWrapper = document.createElement('div');
+		keywordsTextFieldWrapper.id = generateButtonId + '-textfield-wrapper';
+		keywordsTextFieldWrapper.style.display = 'none';
+
+		// Create text field
+		const keywordsTextField = document.createElement('input');
+		keywordsTextField.type = 'text';
+		keywordsTextField.id = generateButtonId + '-textfield';
+		keywordsTextField.name = 'bdaiatg-generate-button-keywords';
+		keywordsTextField.size = 40;
+
+		// Create focus keyword label
+		const focusKeywordLabel = document.createElement('label');
+		focusKeywordLabel.innerText = 'Add SEO Focus keyword';
+		focusKeywordLabel.setAttribute('for', 'bdaiatg-generate-button-focus-keyword');
+
+		// Create focus keyword field
+		const focusKeywordField = document.createElement('input');
+		focusKeywordField.type = 'checkbox';
+		focusKeywordField.id = 'bdaiatg-generate-button-focus-keyword';
+		focusKeywordField.classList.add('bdaiatg-generate-button-focus-keyword');
+
+		const br = document.createElement('br');
+
+		// Append checkbox and label to its wrapper
+		keywordsCheckboxWrapper.appendChild(focusKeywordField);
+		keywordsCheckboxWrapper.appendChild(focusKeywordLabel);
+		keywordsCheckboxWrapper.appendChild(br);
+		keywordsCheckboxWrapper.appendChild(keywordsCheckbox);
+		keywordsCheckboxWrapper.appendChild(keywordsCheckboxLabel);
+
+		// Append text field to its wrapper
+		keywordsTextFieldWrapper.appendChild(keywordsTextField);
+
+
+
+		// Event listener to show/hide text field on checkbox change
+		keywordsCheckbox.addEventListener('change', function () {
+			if (this.checked) {
+				keywordsTextFieldWrapper.style.display = 'block';
+				keywordsTextField.setSelectionRange(0, 0);
+				keywordsTextField.focus();
+			} else {
+				keywordsTextFieldWrapper.style.display = 'none';
+			}
+		});
+
+		focusKeywordField.addEventListener('change', function () {
+			if (this.checked) {
+				focusKeyword = window.import_csv.focus_keyword;
+				// console.log('focusKeyword is : ', focusKeyword);
+			}
+
+		});
+
+		// anchor.title = __('AltText.ai: Update alt text for this single image', 'alttext-ai');
+		anchor.onclick = function () {
+			this.classList.add('disabled');
+			let span = this.querySelector('span');
+
+			if (span) {
+				span.innerText = 'Processing...';
+			}
+		};
+
+		// Button icon
+		const img = document.createElement('img');
+		img.src = import_csv.icon_button_generate;
+		img.alt = 'Update Alt Text with AltText.ai';
+		anchor.appendChild(img);
+
+		// Button label/text
+		const span = document.createElement('span');
+		span.innerText = 'Update Alt Text';
+		anchor.appendChild(span);
+
+		// Append anchor to the button
+		button.appendChild(anchor);
+
+		// Append checkbox and text field wrappers to the button
+		button.appendChild(keywordsCheckboxWrapper);
+		button.appendChild(keywordsTextFieldWrapper);
+
+		// Event listener to initiate generation
+		anchor.addEventListener('click', async function (event) {
+			event.preventDefault();
+
+			const titleEl = (context === 'single') ? document.getElementById('title') : document.querySelector('[data-setting="title"] input');
+			const captionEl = (context === 'single') ? document.getElementById('attachment_caption') : document.querySelector('[data-setting="caption"] textarea');
+			const descriptionEl = (context === 'single') ? document.getElementById('attachment_content') : document.querySelector('[data-setting="description"] textarea');
+			const altTextEl = (context === 'single') ? document.getElementById('attachment_alt') : document.querySelector('[data-setting="alt"] textarea');
+			const attachmentEl = (context === 'single') ? document.getElementById('attachment_url') : document.querySelector('[data-setting="url"] input');
+			const keywords = keywordsCheckbox.checked ? extractKeywords(keywordsTextField.value) : [];
+
+			if(!import_csv.api_key && !import_csv.development) {
+				window.location.href = 'admin.php?page=boomdevs-ai-image-alt-text-generator-settings';
+			}
+
+			const response = await singleGenerateAJAX(attachmentId, keywords, import_csv.site_url, attachmentEl.value, import_csv.api_key, import_csv.language, import_csv.image_title[0], import_csv.image_caption[0], import_csv.image_description[0], import_csv.image_suffix, import_csv.image_prefix);
+
+			// Update alt text in DOM
+			if (response.data.status === true) {
+				altTextEl.value = response.data.generated_text;
+
+				if(import_csv.image_title[0] === 'update_title') {
+					titleEl.value = response.data.generated_text;
+				}
+
+				if(import_csv.image_caption[0] === 'update_caption') {
+					captionEl.value = response.data.generated_text;
+				}
+
+				if(import_csv.image_description[0] === 'update_description') {
+					descriptionEl.value = response.data.generated_text;
+				}
+
+				if(import_csv.alt_description !== '' && import_csv.alt_description !== '0') {
+					descriptionEl.value = response.data.generated_description_text;
+				}
+			}
+
+			anchor.classList.remove('disabled');
+			anchor.querySelector('span').innerText = 'Update Alt Text';
+		});
+
+		return button;
+	}
+
+
+
 	function isPostDirty() {
 		try {
 			// Check for Gutenberg
@@ -24,16 +202,20 @@
 	}
 
 	async function singleGenerateAJAX(attachmentId, keywords = [], site_url, attachment_url, api_key, language, image_title, image_caption, image_description, image_suffix, image_prefix) {
+
 		const data = {
 			'website_url': site_url,
 			'file_url': attachment_url,
 			'language': language,
+			'focus_keyword': focusKeyword,
 			'keywords': keywords,
 			'image_suffix': image_suffix,
 			'image_prefix': image_prefix,
+			'bdaiatg_alt_text_length': import_csv.alt_length,
+			'bdaiatg_alt_description': import_csv.alt_description
 		}
 
-		const response = await fetch('https://aialttextgenerator.com/wp-json/alt-text-generator/v1/get-alt-text', {
+		const response = await fetch(`${import_csv.api_url}/wp-json/alt-text-generator/v1/get-alt-text`, {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
@@ -59,10 +241,13 @@
 				nonce: import_csv.nonce,
 				attachment_id: attachmentId,
 				keywords: keywords,
+				focus_keyword: focusKeyword,
 				alt_text: response_json.data.generated_text,
+				generated_description_text: response_json.data.generated_description_text,
 				image_title: image_title,
 				image_caption: image_caption,
 				image_description: image_description,
+				bdaiatg_alt_description: import_csv.alt_description
 			},
 			success: function (response) {
 
@@ -76,7 +261,7 @@
 	}
 
 	async function checkAvailableToken() {
-		const response = await fetch('https://aialttextgenerator.com/wp-json/alt-text-generator/v1/available-token', {
+		const response = await fetch(`${import_csv.api_url}/wp-json/alt-text-generator/v1/available-token`, {
 			method: 'POST',
 			mode: 'cors',
 			headers: {
@@ -130,6 +315,19 @@
 			display: 'none'
 		});
 
+		// $('#bdaiatg-generate-button-seo-focus-keywords-checkbox').change(function() {
+		// 	if(this.checked) {
+		// 		focusKeyword = window.import_csv.focus_keyword;
+		// 		console.log('focusKeyword is : ', focusKeyword);
+		// 	} else {
+		// 		focusKeyword = '';
+		// 	}
+		// });
+
+
+
+
+
 		let imageUrlArr = [];
 		$('#editor img').each(function() {
 			// Do something with each image, for example:
@@ -170,7 +368,6 @@
 			});
 			return false;
 		}
-
 		jQuery.ajax({
 			type: 'post',
 			dataType: 'json',
@@ -179,6 +376,7 @@
 				action: "bulk_alt_image_generator_gutenburg_post",
 				nonce: import_csv.nonce,
 				post_id: postId,
+				focus_keyword: postFocusKeywords,
 				attachments: imageUrlArr,
 				keywords: extractSeoKeywords,
 				overrite_existing_images: overwrite_existing_img_alt ? overwrite_existing_img_alt : false,
@@ -243,24 +441,24 @@
 
 	// Get all jobs list if default localize jobs not found
 	function getJobsLists() {
-        jQuery.ajax({
-            type: 'post',
-            dataType: 'json',
-            url: import_csv.ajaxurl,
-            data: {
-                action: "get_all_added_jobs",
-                nonce: import_csv.nonce,
-            },
-            success: function(response) {
-                $('.baiatgd_bulk_progress_card').css({
-                    display: 'block',
-                });
+		jQuery.ajax({
+			type: 'post',
+			dataType: 'json',
+			url: import_csv.ajaxurl,
+			data: {
+				action: "get_all_added_jobs",
+				nonce: import_csv.nonce,
+			},
+			success: function(response) {
+				$('.baiatgd_bulk_progress_card').css({
+					display: 'block',
+				});
 
-                fetchGenerateJobs();
-                buttonStatusDisableSet();
-            }
-        })
-    }
+				fetchGenerateJobs();
+				buttonStatusDisableSet();
+			}
+		})
+	}
 
 	// Plan token
 	async function plan_credit() {
@@ -285,19 +483,25 @@
 		const avail =  response_json.data.available_token;
 
 		availableToken = avail;
-		const total =  response_json.data.total_token;
+		let total =  response_json.data.total_token;
 
-		const remainingToken = parseInt(total) - parseInt(avail);
+		let remainingToken = parseInt(total) - parseInt(avail);
 
-		const afterAvailableToken = parseInt(total) - parseInt(remainingToken);
+		let afterAvailableToken = parseInt(total) - parseInt(remainingToken);
 		creditZero = afterAvailableToken;
 
-		if (response_json.data.subscriptions.hasOwnProperty('sumo_product_name') && response_json.data.subscriptions.sumo_product_name.length > 0) {
-			subscription_plan.innerText = response_json.data.subscriptions.sumo_product_name[0];
-		} else {
-			subscription_plan.innerText = 'Free plan';
+		if(import_csv.development) {
+			availableToken = 200;
+			total = 200;
+			remainingToken = 200;
+			afterAvailableToken = 200;
 		}
 
+		// if (response_json.data.subscriptions.hasOwnProperty('sumo_product_name') && response_json.data.subscriptions.sumo_product_name.length > 0) {
+		// 	subscription_plan.innerText = response_json.data.subscriptions.sumo_product_name[0];
+		// } else {
+		// 	subscription_plan.innerText = 'Free plan';
+		// }
 		remaining_credit.innerText = afterAvailableToken;
 
 		const percentCalc = (avail && total) ? ((remainingToken / total) * 100).toFixed(0) : 0;
@@ -335,7 +539,7 @@
 				nonce: import_csv.nonce,
 			},
 			success: function(response) {
-				console.log(response)
+				// console.log(response)
 				$('.baiatgd_bulk_progress_card').css({
 					display: 'none',
 				});
@@ -403,7 +607,7 @@
 
 					$.toast({
 						heading: 'Success',
-				    	text: bulk_job_count + ' images alt text has been generated',
+						text: bulk_job_count + ' images alt text has been generated',
 						showHideTransition: 'fade',
 						bgColor: '#38A169',
 						loader: false,
@@ -414,7 +618,7 @@
 							top: 60
 						},
 					});
-					
+
 				} else {
 					setTimeout(fetchGenerateJobs, 20000);
 					generateAllTextButton.disabled = true;
@@ -431,100 +635,146 @@
 	}
 
 	function buttonStatusDisableSet() {
-        $('.generate_alt_text_btn_loader').css("display", "none");
-    }
+		$('.generate_alt_text_btn_loader').css("display", "none");
+	}
 
-    function buttonStatusEnableSet() {
-        $('.generate_alt_text_btn_loader').css("display", "block");
-    }
+	function buttonStatusEnableSet() {
+		$('.generate_alt_text_btn_loader').css("display", "block");
+	}
 
 	function showProgressBar() {
-        if(import_csv.has_jobs_list !== '0') {
-            $('.baiatgd_bulk_progress_card').css({
-                display: 'block',
-            });
-            fetchGenerateJobs();
-            buttonStatusDisableSet();
-        }
-    }
+		if(import_csv.has_jobs_list !== '0') {
+			$('.baiatgd_bulk_progress_card').css({
+				display: 'block',
+			});
+			fetchGenerateJobs();
+			buttonStatusDisableSet();
+		}
+	}
 
 	showProgressBar();
 
 	function hideProgressBar() {
-        $('.baiatgd_bulk_progress_card').css({
-            display: 'none',
-        });
-    }
+		$('.baiatgd_bulk_progress_card').css({
+			display: 'none',
+		});
+	}
+
+	// Bulk generation Comming soon features
+	const $modal = $('#baiatgd_comming_soon');
+    const $openBtn = $('#generate_alt_text_comming_oon');
+    const $closeBtn = $('#baiatgd_close_modal');
+
+    // Open modal
+    $openBtn.on('click', function() {
+			if(import_csv.api_key === '' && !import_csv.development) {
+			buttonStatusDisableSet();
+			showWarning('Please set api key from settings menu.');
+			return false;
+		}
+
+		if(apiKeyInvalid && !import_csv.development) {
+			buttonStatusDisableSet();
+			showWarning('Invalid api key please contact with support.');
+			return false;
+		}
+
+		if(availableToken === 0 && !import_csv.development) {
+			showWarning("You don't have sufficient credit please purchases more and try again letter");
+			buttonStatusDisableSet();
+			return false;
+		}
+
+		if(creditZero === 0 && !import_csv.development) {
+			showWarning("You don't have sufficient credit please purchases more and try again letter");
+			buttonStatusDisableSet();
+			return false;
+		}
+        $modal.css('display', 'flex');
+    });
+
+    // Close modal
+    $closeBtn.on('click', function() {
+        $modal.css('display', 'none');
+    });
+
+    // Close modal when clicking outside
+    $(window).on('click', function(event) {
+        if ($(event.target).is($modal)) {
+            $modal.css('display', 'none');
+        }
+    });
 
 	// showProgressBar();
 
-	$(document).on('click', '#generate_alt_text', function() {
-        buttonStatusEnableSet();
+	// $(document).on('click', '#generate_alt_text', function() {
+	// 	buttonStatusEnableSet();
 
-        if(import_csv.api_key === '') {
-            buttonStatusDisableSet();
-            showWarning('Please set api key from settings menu.');
-            return false;
-        }
+	// 	if(import_csv.api_key === '' && !import_csv.development) {
+	// 		buttonStatusDisableSet();
+	// 		showWarning('Please set api key from settings menu.');
+	// 		return false;
+	// 	}
 
-        if(apiKeyInvalid) {
-            buttonStatusDisableSet();
-            showWarning('Invalid api key please contact with support.');
-            return false;
-        }
+	// 	if(apiKeyInvalid && !import_csv.development) {
+	// 		buttonStatusDisableSet();
+	// 		showWarning('Invalid api key please contact with support.');
+	// 		return false;
+	// 	}
 
-        if(availableToken === 0) {
-            showWarning("You don't have sufficient credit please purchases more and try again letter");
-            buttonStatusDisableSet();
-            return false;
-        }
+	// 	if(availableToken === 0 && !import_csv.development) {
+	// 		showWarning("You don't have sufficient credit please purchases more and try again letter");
+	// 		buttonStatusDisableSet();
+	// 		return false;
+	// 	}
 
-        if(creditZero === 0) {
-            showWarning("You don't have sufficient credit please purchases more and try again letter");
-            buttonStatusDisableSet();
-            return false;
-        }
+	// 	if(creditZero === 0 && !import_csv.development) {
+	// 		showWarning("You don't have sufficient credit please purchases more and try again letter");
+	// 		buttonStatusDisableSet();
+	// 		return false;
+	// 	}
+		
 
-		jQuery.ajax({
-            type: 'post',
-            dataType: 'json',
-            url: import_csv.ajaxurl,
-            data: {
-                action: "bulk_alt_image_generator",
-                nonce: import_csv.nonce,
-                overrite_existing_images: overrite_existing_images ? overrite_existing_images : false,
-            },
-            success: function(response) {
-                if(!response.success) {
-                    if(response.data.message) {
-                        $.toast({
-                            heading: 'Warning',
-                            text: response.data.message,
-                            showHideTransition: 'fade',
-                            bgColor: '#DD6B20',
-                            loader: false,
-                            icon: 'warning',
-                            allowToastClose: false,
-                            position: {
-                                right: 80,
-                                top: 60
-                            },
-                        });
+	// 	jQuery.ajax({
+	// 		type: 'post',
+	// 		dataType: 'json',
+	// 		url: import_csv.ajaxurl,
+	// 		data: {
+	// 			action: "bulk_alt_image_generator",
+	// 			nonce: import_csv.nonce,
+	// 			overrite_existing_images: overrite_existing_images ? overrite_existing_images : false,
+	// 		},
+	// 		success: function(response) {
+	// 			if(!response.success) {
+	// 				if(response.data.message) {
+	// 					$.toast({
+	// 						heading: 'Warning',
+	// 						text: response.data.message,
+	// 						showHideTransition: 'fade',
+	// 						bgColor: '#DD6B20',
+	// 						loader: false,
+	// 						icon: 'warning',
+	// 						allowToastClose: false,
+	// 						position: {
+	// 							right: 80,
+	// 							top: 60
+	// 						},
+	// 					});
 
-                        buttonStatusDisableSet();
-                    }
-                } else {
-                    if(parseInt(import_csv.has_jobs_list) === 0) {
-                        buttonStatusDisableSet();
-                        getJobsLists();
-                    }
-                }
-            },
-            error: function (error) {
-                buttonStatusDisableSet();
-            }
-        });
-    });
+	// 					buttonStatusDisableSet();
+	// 				}
+	// 			} else {
+	// 				if(parseInt(import_csv.has_jobs_list) === 0) {
+	// 					buttonStatusDisableSet();
+	// 					getJobsLists();
+	// 				}
+	// 			}
+	// 		},
+	// 		error: function (error) {
+	// 			buttonStatusDisableSet();
+	// 		}
+	// 	});
+	// });
 
 	// function check_no_credit() {
 	// 	jQuery.ajax({
@@ -610,7 +860,7 @@
 						result: result,
 					},
 					success: function(response) {
-						console.log(response)
+						// console.log(response)
 					}
 				})
 			};
@@ -656,133 +906,6 @@
 		return false;
 	}
 
-	function createGenerateButton(generateButtonId, attachmentId, context) {
-		const generateUrl = new URL(window.location.href);
-		generateUrl.searchParams.set('bdaiatg_action', 'generate');
-
-		// Button wrapper
-		const button = document.createElement('div');
-		button.id = generateButtonId;
-
-		// Clickable anchor inside the wrapper for initiating the action
-		const anchor = document.createElement('a');
-		anchor.id = generateButtonId + '-anchor';
-		anchor.href = generateUrl;
-		anchor.className = 'button-secondary button-large';
-
-		// Create checkbox wrapper
-		const keywordsCheckboxWrapper = document.createElement('div');
-		keywordsCheckboxWrapper.id = generateButtonId + '-checkbox-wrapper';
-
-		// Create checkbox
-		const keywordsCheckbox = document.createElement('input');
-		keywordsCheckbox.type = 'checkbox';
-		keywordsCheckbox.id = generateButtonId + '-keywords-checkbox';
-		keywordsCheckbox.name = 'bdaiatg-generate-button-keywords-checkbox';
-
-		// Create label for checkbox
-		const keywordsCheckboxLabel = document.createElement('label');
-		keywordsCheckboxLabel.htmlFor = 'bdaiatg-generate-button-keywords-checkbox';
-		keywordsCheckboxLabel.innerText = 'Add SEO keywords';
-
-		// Create text field wrapper
-		const keywordsTextFieldWrapper = document.createElement('div');
-		keywordsTextFieldWrapper.id = generateButtonId + '-textfield-wrapper';
-		keywordsTextFieldWrapper.style.display = 'none';
-
-		// Create text field
-		const keywordsTextField = document.createElement('input');
-		keywordsTextField.type = 'text';
-		keywordsTextField.id = generateButtonId + '-textfield';
-		keywordsTextField.name = 'bdaiatg-generate-button-keywords';
-		keywordsTextField.size = 40;
-
-		// Append checkbox and label to its wrapper
-		keywordsCheckboxWrapper.appendChild(keywordsCheckbox);
-		keywordsCheckboxWrapper.appendChild(keywordsCheckboxLabel);
-
-		// Append text field to its wrapper
-		keywordsTextFieldWrapper.appendChild(keywordsTextField);
-
-		// Event listener to show/hide text field on checkbox change
-		keywordsCheckbox.addEventListener('change', function () {
-			if (this.checked) {
-				keywordsTextFieldWrapper.style.display = 'block';
-				keywordsTextField.setSelectionRange(0, 0);
-				keywordsTextField.focus();
-			} else {
-				keywordsTextFieldWrapper.style.display = 'none';
-			}
-		});
-
-		// anchor.title = __('AltText.ai: Update alt text for this single image', 'alttext-ai');
-		anchor.onclick = function () {
-			this.classList.add('disabled');
-			let span = this.querySelector('span');
-
-			if (span) {
-				span.innerText = 'Processing...';
-			}
-		};
-
-		// Button icon
-		const img = document.createElement('img');
-		img.src = import_csv.icon_button_generate;
-		img.alt = 'Update Alt Text with AltText.ai';
-		anchor.appendChild(img);
-
-		// Button label/text
-		const span = document.createElement('span');
-		span.innerText = 'Update Alt Text';
-		anchor.appendChild(span);
-
-		// Append anchor to the button
-		button.appendChild(anchor);
-
-		// Append checkbox and text field wrappers to the button
-		button.appendChild(keywordsCheckboxWrapper);
-		button.appendChild(keywordsTextFieldWrapper);
-
-		// Event listener to initiate generation
-		anchor.addEventListener('click', async function (event) {
-			event.preventDefault();
-
-			const titleEl = (context === 'single') ? document.getElementById('title') : document.querySelector('[data-setting="title"] input');
-			const captionEl = (context === 'single') ? document.getElementById('attachment_caption') : document.querySelector('[data-setting="caption"] textarea');
-			const descriptionEl = (context === 'single') ? document.getElementById('attachment_content') : document.querySelector('[data-setting="description"] textarea');
-			const altTextEl = (context === 'single') ? document.getElementById('attachment_alt') : document.querySelector('[data-setting="alt"] textarea');
-			const attachmentEl = (context === 'single') ? document.getElementById('attachment_url') : document.querySelector('[data-setting="url"] input');
-			const keywords = keywordsCheckbox.checked ? extractKeywords(keywordsTextField.value) : [];
-
-			if(!import_csv.api_key) {
-				window.location.href = 'admin.php?page=boomdevs-ai-image-alt-text-generator-settings';
-			}
-
-			const response = await singleGenerateAJAX(attachmentId, keywords, import_csv.site_url, attachmentEl.value, import_csv.api_key, import_csv.language, import_csv.image_title[0], import_csv.image_caption[0], import_csv.image_description[0], import_csv.image_suffix, import_csv.image_prefix);
-
-			// Update alt text in DOM
-			if (response.data.status === true) {
-				altTextEl.value = response.data.generated_text;
-
-				if(import_csv.image_title[0] === 'update_title') {
-					titleEl.value = response.data.generated_text;
-				}
-
-				if(import_csv.image_caption[0] === 'update_caption') {
-					captionEl.value = response.data.generated_text;
-				}
-
-				if(import_csv.image_description[0] === 'update_description') {
-					descriptionEl.value = response.data.generated_text;
-				}
-			}
-
-			anchor.classList.remove('disabled');
-			anchor.querySelector('span').innerText = 'Update Alt Text';
-		});
-
-		return button;
-	}
 
 	document.addEventListener('DOMContentLoaded', async () => {
 		const isAttachmentPage = window.location.href.includes('post.php') && jQuery('body').hasClass('post-type-attachment');
@@ -846,7 +969,7 @@
 				const urlParams = new URLSearchParams(window.location.search);
 				attachmentId = urlParams.get('item');
 
-				console.log(attachmentId);
+				// console.log(attachmentId);
 
 				// Bail early if post ID is not a number.
 				if (!attachmentId) {
@@ -891,4 +1014,84 @@
 			return false;
 		}
 	});
+
+
+
 })( jQuery );
+
+
+// Add this to your boomdevs-ai-image-alt-text-generator-edit-media.js file
+
+jQuery(document).ready(function($) {
+	// Detect media library clicks and URL changes
+	var currentItemId = import_csv.current_item_id;
+
+	// Function to extract item ID from URL
+	function getItemIdFromUrl() {
+		var urlParams = new URLSearchParams(window.location.search);
+		return urlParams.get('item');
+	}
+
+	// Function to update focus keyword when item changes
+	function updateFocusKeyword(itemId) {
+		if (itemId && itemId !== currentItemId) {
+			$.ajax({
+				url: import_csv.ajaxurl,
+				type: 'POST',
+				data: {
+					action: 'get_focus_keyword',
+					nonce: import_csv.nonce,
+					item_id: itemId
+				},
+				success: function(response) {
+					if (response.success && response.data) {
+						// Update the stored focus keyword
+						import_csv.focus_keyword = response.data.focus_keyword;
+						currentItemId = itemId;
+
+					}
+				}
+			});
+		}
+	}
+
+	// Detect URL changes for media items
+	function checkForItemChanges() {
+		var newItemId = getItemIdFromUrl();
+		if (newItemId && newItemId !== currentItemId) {
+			updateFocusKeyword(newItemId);
+		}
+	}
+
+	// Check whenever the media modal or attachment details open
+	$(document).on('click', '.attachment', function() {
+		setTimeout(checkForItemChanges, 300); // Small delay to let URL update
+	});
+
+	// Use MutationObserver to detect URL changes in the media library
+	if (window.MutationObserver && window.location.href.indexOf('upload.php') !== -1) {
+		var lastUrl = location.href;
+		new MutationObserver(function() {
+			if (location.href !== lastUrl) {
+				lastUrl = location.href;
+				checkForItemChanges();
+			}
+		}).observe(document, {subtree: true, childList: true});
+	}
+
+	// Initial check on page load
+	checkForItemChanges();
+
+	// Also hook into WordPress media library events if available
+	if (wp && wp.media) {
+		wp.media.events.on('editor:image-update', function() {
+			checkForItemChanges();
+		});
+
+		wp.media.events.on('editor:frame-create', function() {
+			checkForItemChanges();
+		});
+	}
+});
+
+
