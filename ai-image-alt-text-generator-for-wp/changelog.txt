@@ -27,3 +27,7 @@ SEO Focus Keywords: Added support for RankMath SEO, Yoast SEO, and All In One SE
 Description Generator: New modes – Short (<60 chars), Medium (<100), Long (<130).
 Image History: Enhanced tracking, metadata, and export support.
 Fixes: UI polish & keyword detection improvements.
+
+= 1.1.0 - 30 May 2025 =
+Add : Notification popup for offer
+Fix: some minor issues

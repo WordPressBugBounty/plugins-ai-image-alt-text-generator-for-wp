@@ -1,0 +1,25 @@
+
+.boomdevs-notification-wrapper {
+    display: none;
+}
+
+.boomdevs-notification-wrapper.notice.notice-info.is-dismissible.boomdevs-notification-widget{
+    padding: 20px;
+    border: 1px solid #c3c4c7;
+    border-left: 3px solid #353eeb;
+}
+
+.wp-block-buttons{
+    display: inline-flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+a.wp-block-button__link{
+    cursor: pointer;
+    text-decoration: none;
+}
+a.wp-block-button__link.has-base-2-color.has-text-color.has-background.has-link-color.wp-element-button{
+
+    text-decoration: none;
+}

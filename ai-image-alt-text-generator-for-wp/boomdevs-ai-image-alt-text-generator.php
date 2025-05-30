@@ -18,7 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
  * Plugin Name:       Ai Image Alt Text Generator for WP
  * Plugin URI:        https://aialttextgenerator.com/
  * Description:       Effortlessly generate descriptive alt text for images using AI within your WordPress website.
- * Version:           1.0.9
+ * Version:           1.1.0
  * Author:            WP Messiah
  * Author URI:        https://wpmessiah.com/
  * License:           GPL-2.0+
@@ -37,7 +37,7 @@ if (!defined('ABSPATH')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.0.9');
+define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.1.0');
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_PATH', plugin_dir_path(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL', plugin_dir_url(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_NAME', 'ai-image-alt-text-generator-for-wp');
@@ -45,6 +45,7 @@ define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_FULL_NAME', 'Ai Image Alt Text Gener
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_BASE_NAME', plugin_basename(__FILE__));
 define('BDAIATG_DB_ASSET_TABLE', 'bdaiatg_assets');
 define('BDAIATG_API_URL', 'https://aialttextgenerator.com');
+define( 'BDAIATG_AI_IMAGE_ALTTEXT_BACKEND_URL', 'https://wpmessiah.com/wp-json/notification-api/v1/get');
 
 // Development mode
 define('BDAIATG_DEVELOPMENT', false);

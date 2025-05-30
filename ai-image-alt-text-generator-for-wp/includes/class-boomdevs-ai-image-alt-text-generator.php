@@ -70,7 +70,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator {
 		if ( defined( 'BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION' ) ) {
 			$this->version = BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION;
 		} else {
-			$this->version = '1.0.9';
+			$this->version = '1.1.0';
 		}
 		$this->plugin_name = 'ai-image-alt-text-generator-for-wp';
 
@@ -128,6 +128,8 @@ class Boomdevs_Ai_Image_Alt_Text_Generator {
          * The class responsible for loading codestar framework of the plugin.
          */
         require_once plugin_dir_path( dirname(__FILE__) ) . 'libs/codestar-framework/codestar-framework.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-boomdevs-notification-widget-ai-image-alttext.php';
 
         /**
          * The class responsible for defining internationalization functionality
