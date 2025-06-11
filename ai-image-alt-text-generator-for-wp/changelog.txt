@@ -31,3 +31,6 @@ Fixes: UI polish & keyword detection improvements.
 = 1.1.0 - 30 May 2025 =
 Add : Notification popup for offer
 Fix: some minor issues
+
+= 1.1.1 - 11 June 2025 =
+Fix: admin panel loading issues

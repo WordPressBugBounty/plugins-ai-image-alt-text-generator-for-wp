@@ -18,7 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
  * Plugin Name:       Ai Image Alt Text Generator for WP
  * Plugin URI:        https://aialttextgenerator.com/
  * Description:       Effortlessly generate descriptive alt text for images using AI within your WordPress website.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            WP Messiah
  * Author URI:        https://wpmessiah.com/
  * License:           GPL-2.0+
@@ -37,7 +37,7 @@ if (!defined('ABSPATH')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.1.0');
+define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.1.1');
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_PATH', plugin_dir_path(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL', plugin_dir_url(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_NAME', 'ai-image-alt-text-generator-for-wp');
