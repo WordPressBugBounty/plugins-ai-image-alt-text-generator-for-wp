@@ -59,6 +59,13 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
     // Verify nonce for AJAX requests
     public function verify_authorization()
     {
+        if(!current_user_can('manage_options')) {
+            wp_send_json_error(array(
+                'message' => 'Permission denied!',
+            ));
+            return false;
+        }
+        
         if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'import_csv')) {
             wp_send_json_error(array(
                 'message' => 'Permission denied!',

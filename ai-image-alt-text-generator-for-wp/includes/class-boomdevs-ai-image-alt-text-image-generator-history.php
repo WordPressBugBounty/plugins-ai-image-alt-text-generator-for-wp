@@ -57,6 +57,13 @@ class AI_Alt_Text_History_Table extends WP_List_Table {
      * Retrieve history data from the database
      */
     public function get_history_data($per_page, $page_number) {
+        if(!current_user_can('manage_options')) {
+            wp_send_json_error(array(
+                'message' => 'Permission denied!',
+            ));
+            return false;
+        }
+
         global $wpdb;
 
         $offset = ($page_number - 1) * $per_page;

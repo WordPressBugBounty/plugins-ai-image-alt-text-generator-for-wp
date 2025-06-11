@@ -18,7 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
  * Plugin Name:       Ai Image Alt Text Generator for WP
  * Plugin URI:        https://aialttextgenerator.com/
  * Description:       Effortlessly generate descriptive alt text for images using AI within your WordPress website.
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            WP Messiah
  * Author URI:        https://wpmessiah.com/
  * License:           GPL-2.0+
@@ -37,7 +37,7 @@ if (!defined('ABSPATH')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.1.1');
+define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.1.2');
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_PATH', plugin_dir_path(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL', plugin_dir_url(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_NAME', 'ai-image-alt-text-generator-for-wp');
@@ -129,7 +129,10 @@ add_action('init', 'appsero_init_tracker_ai_image_alt_text_generator_for_wp');
 
  if( ! function_exists( 'validate_api_key' ) ) {
     function validate_api_key( $value ) {
-        return esc_html__( 'This api key is not valid!', 'ai-image-alt-text-generator-for-wp' );
+		if(!current_user_can('manage_options')) {
+			return esc_html__( 'Permission denied!', 'ai-image-alt-text-generator-for-wp' );
+		}
+
         $api_key = $value;
         $url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/available-token';
 		$body_data = array(

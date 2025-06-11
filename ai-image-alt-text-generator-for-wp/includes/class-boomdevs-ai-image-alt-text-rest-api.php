@@ -32,6 +32,13 @@ class BDAIATG_Ai_Image_Alt_Text_Generator_Rest_Api {
     }
 
     public function fetch_data() {
+        if(!current_user_can('manage_options')) {
+            wp_send_json_error(array(
+                'message' => 'Permission denied!',
+            ));
+            return false;
+        }
+
         $bulk_alt_text_options = get_option('bulk_alt_text_processing');
 
         if(isset($bulk_alt_text_options)) {
@@ -44,6 +51,13 @@ class BDAIATG_Ai_Image_Alt_Text_Generator_Rest_Api {
     }
 
     public function fetch_jobs() {
+        if(!current_user_can('manage_options')) {
+            wp_send_json_error(array(
+                'message' => 'Permission denied!',
+            ));
+            return false;
+        }
+
         $bulk_alt_text_jobs_array = get_option('altgen_attachments_jobs');
 
         if($bulk_alt_text_jobs_array) {

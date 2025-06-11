@@ -7,8 +7,14 @@ if (!defined('ABSPATH')) {
 class AltUpdateHistory {
     public static function store($args = array())
     {
-        global $wpdb;
+        if(!current_user_can('manage_options')) {
+            wp_send_json_error(array(
+                'message' => 'Permission denied!',
+            ));
+            return false;
+        }
 
+        global $wpdb;
         $current_user = wp_get_current_user();
 
         $defaults = array(

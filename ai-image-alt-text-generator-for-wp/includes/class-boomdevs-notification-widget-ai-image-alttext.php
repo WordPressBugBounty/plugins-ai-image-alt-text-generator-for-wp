@@ -27,9 +27,12 @@ class BoomDevs_Notification_Widget_ai_image_alttext
         if (is_wp_error($response)) return ['error' => $response->get_error_message()];
         $data = json_decode(wp_remote_retrieve_body($response), true);
 
-        if (empty($data)) return ['error' => 'No data returned from API'];
-
-        set_transient($this->transient_key, $data, 12 * HOUR_IN_SECONDS);
+        if (empty($data)) {
+            set_transient($this->transient_key, [], 12 * HOUR_IN_SECONDS);
+        } else {
+            set_transient($this->transient_key, $data, 12 * HOUR_IN_SECONDS);
+        }
+        
         return $data;
     }
 

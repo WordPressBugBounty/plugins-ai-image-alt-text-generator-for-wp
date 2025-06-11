@@ -37,6 +37,13 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 	}
 
 	public function bdaiatg_save_alt_text() {
+		if(!current_user_can('manage_options')) {
+			wp_send_json_error(array(
+				'message' => 'Permission denied!',
+			));
+			return false;
+		}
+
 		// Verify nonce for security
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( wp_unslash( sanitize_text_field($_POST['nonce']) ), 'import_csv' ) ) {
 			die( 'Permission denied!' );
@@ -100,6 +107,13 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 	}
 
 	public function bulk_alt_image_generator_gutenburg_post() {
+		if(!current_user_can('manage_options')) {
+			wp_send_json_error(array(
+				'message' => 'Permission denied!',
+			));
+			return false;
+		}
+
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'import_csv' ) ) {
 			die( 'Permission denied!' );
 		}
@@ -296,6 +310,13 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 		));
 	}
 	public function bulk_alt_image_generator_gutenburg_block() {
+		if(!current_user_can('manage_options')) {
+			wp_send_json_error(array(
+				'message' => 'Permission denied!',
+			));
+			return false;
+		}
+		
 		if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'import_csv' ) ) {
 			die( 'Permission denied!' );
 		}
