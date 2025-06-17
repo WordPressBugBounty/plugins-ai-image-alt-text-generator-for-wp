@@ -759,12 +759,12 @@
 			}
 
 			public function get_media_images_and_alt_text() {
-				if(!current_user_can('manage_options')) {
-					wp_send_json_error(array(
-						'message' => 'Permission denied!',
-					));
-					return false;
-				}
+				// if(!current_user_can('manage_options')) {
+				// 	wp_send_json_error(array(
+				// 		'message' => 'Permission denied!',
+				// 	));
+				// 	return false;
+				// }
 				
                 $total_images_count = 0;
                 $missing_alt_text_count = 0;
