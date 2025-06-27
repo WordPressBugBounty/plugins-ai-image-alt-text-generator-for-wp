@@ -664,7 +664,7 @@
 							'id'      => 'bdaiatg_alt_description',
 							'type'    => 'checkbox',
 							'title'   => esc_html__('Enable Description', 'ai-image-alt-text-generator-for-wp'),
-                            'after' => esc_html__('Note: An additional 1 credit will be deducted for each image. (Available only for Gutenberg Post, Block, and Media Editor)', 'ai-image-alt-text-generator-for-wp'),
+                            'after' => esc_html__('Note: An additional extra 1 credit will be deducted for each image.', 'ai-image-alt-text-generator-for-wp'),
                             'label'   => esc_html__('Enable', 'ai-image-alt-text-generator-for-wp'),
 							'default' => false,
 							'dependency' => array(
@@ -759,13 +759,6 @@
 			}
 
 			public function get_media_images_and_alt_text() {
-				// if(!current_user_can('manage_options')) {
-				// 	wp_send_json_error(array(
-				// 		'message' => 'Permission denied!',
-				// 	));
-				// 	return false;
-				// }
-				
                 $total_images_count = 0;
                 $missing_alt_text_count = 0;
 

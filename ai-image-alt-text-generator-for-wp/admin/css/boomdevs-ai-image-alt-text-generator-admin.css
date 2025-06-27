@@ -252,12 +252,18 @@
   background-image: linear-gradient(to right, #060097, #8204FF, #C10FFF);
   border: none;
   border-radius: 10px;
-  padding: 16px 40px;
+  /* padding: 16px 40px; */
   font-size: 20px;
   font-weight: 600;
   line-height: 28px;
   color: #ffffff;
   cursor: pointer;
+  height: 60px;
+  width: 236px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 .boomdevs_ai_img_alt_text_generator_bulk .baiatgd_bulk_smush_btn_wrapper .generate_checkbox_wrapper {
   margin-top: 20px;
@@ -279,8 +285,8 @@
   z-index: 5;
   transition: all 0.3s ease-in-out;
 }
-.boomdevs_ai_img_alt_text_generator_bulk .baiatgd_bulk_smush_btn_wrapper .generate_button_wrap .generate_alt_text_btn_loader::after,
-.boomdevs_ai_img_alt_text_generator_bulk .baiatgd_bulk_smush_btn_wrapper .generate_button_wrap .generate_alt_text_btn_loader::before {
+/* .boomdevs_ai_img_alt_text_generator_bulk .baiatgd_bulk_smush_btn_wrapper .generate_button_wrap .generate_alt_text_btn_loader::after, */
+/* .boomdevs_ai_img_alt_text_generator_bulk .baiatgd_bulk_smush_btn_wrapper .generate_button_wrap .generate_alt_text_btn_loader::before {
   content: '';
   box-sizing: border-box;
   width: 48px;
@@ -294,7 +300,7 @@
 }
 .boomdevs_ai_img_alt_text_generator_bulk .baiatgd_bulk_smush_btn_wrapper .generate_button_wrap .generate_alt_text_btn_loader::after {
   animation-delay: 1s;
-}
+} */
 
 .baiatgd_percentage_wrapper_cancel {
   display: flex;
@@ -801,8 +807,8 @@ body.toplevel_page_ai-alt-text-generator #wpcontent {
 
 .baiatgd_modal-content {
   background-color: white;
-  padding: 24px;
-  border-radius: 5px;
+  padding: 30px;
+  border-radius: 12px;
   width: 90%;
   max-width: 500px;
   position: relative;
@@ -811,8 +817,8 @@ body.toplevel_page_ai-alt-text-generator #wpcontent {
 
 .baiatgd_modal_close-btn {
   position: absolute;
-  top: 6px;
-  right: 10px;
+  top: -2px;
+  right: 4px;
   font-size: 24px;
   cursor: pointer;
   background: none;
@@ -826,6 +832,36 @@ body.toplevel_page_ai-alt-text-generator #wpcontent {
   color: #333;
   /* text-align: center; */
 }
+
+.bulk_loader {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      position: relative;
+      animation: rotate 1s linear infinite;
+      display: none;
+    }
+    .bulk_loader::before {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+      inset: 0px;
+      border-radius: 50%;
+      border: 3px solid #FFF;
+      animation: prixClipFix 2s linear infinite ;
+    }
+
+    @keyframes rotate {
+      100%   {transform: rotate(360deg)}
+    }
+
+    @keyframes prixClipFix {
+        0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+        25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+        50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+        75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+        100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+    }
 
 
 /*# sourceMappingURL=boomdevs-ai-image-alt-text-generator-admin.css.map */

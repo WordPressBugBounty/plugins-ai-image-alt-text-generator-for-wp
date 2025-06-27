@@ -22,89 +22,92 @@ require_once(__DIR__ . '/../includes/class-boomdevs-ai-image-alt-text-generator-
  * @subpackage Boomdevs_Ai_Image_Alt_Text_Generator/admin
  * @author     BoomDevs <contact@boomdevs.com>
  */
-class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
+class Boomdevs_Ai_Image_Alt_Text_Generator_Admin
+{
 
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
-	private $plugin_name;
+    /**
+     * The ID of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $plugin_name    The ID of this plugin.
+     */
+    private $plugin_name;
 
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
+    /**
+     * The version of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $version    The current version of this plugin.
+     */
+    private $version;
 
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
-	 */
-	public function __construct( $plugin_name, $version ) {
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since    1.0.0
+     * @param      string    $plugin_name       The name of this plugin.
+     * @param      string    $version    The version of this plugin.
+     */
+    public function __construct($plugin_name, $version)
+    {
 
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+        $this->plugin_name = $plugin_name;
+        $this->version = $version;
 
-		add_action('wp_ajax_get_focus_keyword', array($this, 'ajax_get_focus_keyword'));
+        add_action('wp_ajax_get_focus_keyword', array($this, 'ajax_get_focus_keyword'));
+    }
 
-	}
+    /**
+     * Register the stylesheets for the admin area.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_styles()
+    {
 
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
+        /**
+         * This function is provided for demonstration purposes only.
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Boomdevs_Ai_Image_Alt_Text_Generator_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Boomdevs_Ai_Image_Alt_Text_Generator_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Boomdevs_Ai_Image_Alt_Text_Generator_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Boomdevs_Ai_Image_Alt_Text_Generator_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+        wp_enqueue_style($this->plugin_name . 'toast-css', plugin_dir_url(__FILE__) . 'css/jquery.toast.min.css', array(), $this->version, 'all');
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/boomdevs-ai-image-alt-text-generator-admin.css', array(), time(), 'all');
+    }
 
-		wp_enqueue_style( $this->plugin_name . 'toast-css', plugin_dir_url( __FILE__ ) . 'css/jquery.toast.min.css', array(), $this->version, 'all' );
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/boomdevs-ai-image-alt-text-generator-admin.css', array(), time(), 'all' );
-	}
+    /**
+     * Register the JavaScript for the admin area.
+     *
+     * @since    1.0.0
+     */
 
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	
-	 public function enqueue_scripts() {
+    public function enqueue_scripts()
+    {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Boomdevs_Ai_Image_Alt_Text_Generator_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Boomdevs_Ai_Image_Alt_Text_Generator_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+        /**
+         * This function is provided for demonstration purposes only.
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Boomdevs_Ai_Image_Alt_Text_Generator_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Boomdevs_Ai_Image_Alt_Text_Generator_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
 
         $settings = BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::get_settings();
 
         $bulk_alt_text_options = get_option('bulk_alt_text_processing');
-        if(isset($bulk_alt_text_options)) {
+        if (isset($bulk_alt_text_options)) {
             $bulk_alt_text_processing = $bulk_alt_text_options;
         }
 
@@ -127,10 +130,10 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
 
         global $wpdb;
         $focus_keyword = '';
-        
+
         // Check for item parameter (attachment ID) first
         $item_id = isset($_GET['item']) ? intval($_GET['item']) : 0;
-        
+
         if ($item_id) {
             // Look for posts containing the image ID in post content
             $all_posts_query = new WP_Query(array(
@@ -140,32 +143,32 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
                 'fields' => 'ids',
                 'no_found_rows' => true,
             ));
-            
+
             $needle = 'wp-image-' . $item_id;
-            
+
             foreach ($all_posts_query->posts as $related_post_id) {
                 $post_content = get_post_field('post_content', $related_post_id, 'raw');
-                
+
                 if (strpos($post_content, $needle) !== false) {
                     // Check for Rank Math
                     if (defined('RANK_MATH_VERSION')) {
                         $focus_keyword = get_post_meta($related_post_id, 'rank_math_focus_keyword', true);
-                    } 
+                    }
                     // Check for Yoast
                     elseif (defined('WPSEO_VERSION')) {
                         $focus_keyword = get_post_meta($related_post_id, '_yoast_wpseo_focuskw', true);
-                    } 
+                    }
                     // Check for AIOSEO
                     elseif (defined('AIOSEO_VERSION')) {
                         $table_name = $wpdb->prefix . 'aioseo_posts';
                         $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'");
-                        
+
                         if ($table_exists) {
                             $row = $wpdb->get_row($wpdb->prepare(
                                 "SELECT keyphrases FROM $table_name WHERE post_id = %d",
                                 $related_post_id
                             ));
-                            
+
                             if ($row && !empty($row->keyphrases)) {
                                 $keyphrases = json_decode($row->keyphrases, true);
                                 if (isset($keyphrases['focus']['keyphrase'])) {
@@ -174,17 +177,17 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
                             }
                         }
                     }
-                    
+
                     if (!empty($focus_keyword)) {
                         break; // Use the first focus keyword found
                     }
                 }
             }
-        } 
+        }
         // If no item or no focus keyword found, check for post parameter
         else {
             $post_id = isset($_GET['post']) ? intval($_GET['post']) : 0;
-            
+
             if ($post_id) {
                 // Check for Rank Math
                 if (defined('RANK_MATH_VERSION')) {
@@ -198,16 +201,16 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
                 elseif (defined('AIOSEO_VERSION')) {
                     // Try the custom table method first (newer versions)
                     $table_name = $wpdb->prefix . 'aioseo_posts';
-                    
+
                     // Check if table exists
                     $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'");
-                    
+
                     if ($table_exists) {
                         $row = $wpdb->get_row($wpdb->prepare(
-                            "SELECT keyphrases FROM $table_name WHERE post_id = %d", 
+                            "SELECT keyphrases FROM $table_name WHERE post_id = %d",
                             $post_id
                         ));
-                        
+
                         if ($row && !empty($row->keyphrases)) {
                             $keyphrases = json_decode($row->keyphrases, true);
                             if (isset($keyphrases['focus']['keyphrase'])) {
@@ -237,6 +240,16 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/boomdevs-ai-image-alt-text-generator-admin.js', array('jquery'), time(), true);
         wp_enqueue_script($this->plugin_name . 'edit-media', plugin_dir_url(__FILE__) . 'js/boomdevs-ai-image-alt-text-generator-edit-media.js', array('jquery'), time(), true);
 
+        // update_option('bdaiatg_bulk_generating', true);
+
+        $bulk_generating = get_option('bdaiatg_bulk_generating');
+
+        if ($bulk_generating) {
+            $bulk_generating = true;
+        } else {
+            $bulk_generating = false;
+        }
+        
         wp_localize_script(
             $this->plugin_name . 'edit-media',
             'import_csv',
@@ -261,17 +274,19 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
                 'development' => defined('BDAIATG_DEVELOPMENT') ? BDAIATG_DEVELOPMENT : false,
                 'api_url' => defined('BDAIATG_API_URL') ? BDAIATG_API_URL : '',
                 'current_item_id' => $item_id, // Add the current item ID
+                'bulk_generating' => $bulk_generating,
             )
         );
-        
+
         // Add a direct script to verify the value in the console
-        
+
     }
 
     /**
      * Get focus keyword for an item by AJAX
      */
-    public function ajax_get_focus_keyword() {
+    public function ajax_get_focus_keyword()
+    {
         // Verify nonce
         if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'import_csv')) {
             wp_send_json_error('Invalid nonce');
@@ -296,15 +311,15 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
             'fields' => 'ids',
             'no_found_rows' => true,
         ));
-        
+
         $needle = 'wp-image-' . $item_id;
-        
+
         foreach ($all_posts_query->posts as $related_post_id) {
             $post_content = get_post_field('post_content', $related_post_id, 'raw');
-            
+
             if (strpos($post_content, $needle) !== false) {
                 $post_focus_keyword = '';
-                
+
                 // Check for Rank Math
                 if (defined('RANK_MATH_VERSION')) {
                     $post_focus_keyword = get_post_meta($related_post_id, 'rank_math_focus_keyword', true);
@@ -317,13 +332,13 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
                 elseif (defined('AIOSEO_VERSION')) {
                     $table_name = $wpdb->prefix . 'aioseo_posts';
                     $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'");
-                    
+
                     if ($table_exists) {
                         $row = $wpdb->get_row($wpdb->prepare(
                             "SELECT keyphrases FROM $table_name WHERE post_id = %d",
                             $related_post_id
                         ));
-                        
+
                         if ($row && !empty($row->keyphrases)) {
                             $keyphrases = json_decode($row->keyphrases, true);
                             if (isset($keyphrases['focus']['keyphrase'])) {
@@ -332,7 +347,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
                         }
                     }
                 }
-                
+
                 if (!empty($post_focus_keyword)) {
                     $focus_keyword = $post_focus_keyword;
                     break; // Use the first focus keyword found
@@ -358,8 +373,9 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin {
  *
  * @return void
  */
-function wpdev_enqueue_editor_modifications() {
-    $asset_file = include plugin_dir_path( __FILE__ ) . '../bdalt-text-gen-block/build/index.asset.php';
-    wp_enqueue_script( 'bdaitgen-override-core-img', plugin_dir_url( __FILE__ ) . '../bdalt-text-gen-block/build/index.js', $asset_file['dependencies'], $asset_file['version'], true );
+function wpdev_enqueue_editor_modifications()
+{
+    $asset_file = include plugin_dir_path(__FILE__) . '../bdalt-text-gen-block/build/index.asset.php';
+    wp_enqueue_script('bdaitgen-override-core-img', plugin_dir_url(__FILE__) . '../bdalt-text-gen-block/build/index.js', $asset_file['dependencies'], $asset_file['version'], true);
 }
-add_action( 'enqueue_block_editor_assets', 'wpdev_enqueue_editor_modifications' );
+add_action('enqueue_block_editor_assets', 'wpdev_enqueue_editor_modifications');

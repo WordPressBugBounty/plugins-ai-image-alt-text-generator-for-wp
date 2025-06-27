@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: Alternative Text, image alt text
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -164,3 +164,9 @@ Fix: some minor issues
 
 = 1.1.3 - 17 June 2025 =
 Fix: permissing denied issues
+
+= 1.1.4 – 27 June 2025 =
+Bulk generation feature has been enabled
+Bulk generation speed has been improved
+Bulk generation has been further optimized
+Mail notification has been added after bulk generation completes

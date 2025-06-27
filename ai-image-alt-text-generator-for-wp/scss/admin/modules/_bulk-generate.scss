@@ -11,7 +11,7 @@
 
     .bdaiatg_bulk_generate_result_outputs {
       display: grid;
-      grid-template-columns: repeat(2,minmax(0,1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
       max-width: 670px;
       width: 100%;
@@ -72,7 +72,7 @@
 
     .bdaiatg_bulk_generate_keywords_options {
       display: grid;
-      grid-template-columns: repeat(2,minmax(0,1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
 
       .bdaiatg_bulk_generate_keywords_options_item {
@@ -120,7 +120,7 @@
       }
 
       &:focus {
-        box-shadow: 0 0 0 1px #fff,0 0 0 3px #2271b1;
+        box-shadow: 0 0 0 1px #fff, 0 0 0 3px #2271b1;
         outline: 2px solid transparent;
       }
     }
@@ -148,7 +148,7 @@
   }
 }
 
-.boomdevs_ai_img_alt_text_generator_dashboard{
+.boomdevs_ai_img_alt_text_generator_dashboard {
   max-width: 1392px;
   //width: 100%;
   background: #ffffff;
@@ -186,7 +186,7 @@
         border-radius: 50px;
         text-align: center;
 
-        img{
+        img {
           width: 30px;
           height: 30px;
           padding-top: 20px;
@@ -198,7 +198,7 @@
         flex-direction: column;
         flex: 1;
 
-        span.content_text{
+        span.content_text {
           font-size: 16px;
           font-weight: 400;
           line-height: 24px;
@@ -223,19 +223,22 @@
       gap: 0;
     }
   }
-  .baiatgd_plan_notice{
+
+  .baiatgd_plan_notice {
     background: #4834D40D;
     border: 1px solid #4834D480;
     border-left: 10px solid #4834D4;
     border-radius: 12px;
     margin-top: 40px;
     padding: 40px;
-    span.notice_text{
+
+    span.notice_text {
       font-size: 16px;
       font-weight: 500;
       line-height: 24px;
       color: #212529;
-      a{
+
+      a {
         color: #4834D4;
       }
     }
@@ -243,7 +246,7 @@
 
 }
 
-.boomdevs_ai_img_alt_text_generator_bulk{
+.boomdevs_ai_img_alt_text_generator_bulk {
   max-width: 1392px;
   //width: 100%;
   background: #ffffff;
@@ -290,9 +293,10 @@
       }
     }
   }
+
   .baiatgd_bulk_smush_btn_wrapper {
     .baiatgd_generate_btn {
-      background-image: linear-gradient( to right, #060097,#8204FF,#C10FFF);
+      background-image: linear-gradient(to right, #060097, #8204FF, #C10FFF);
       border: none;
       border-radius: 10px;
       padding: 16px 40px;
