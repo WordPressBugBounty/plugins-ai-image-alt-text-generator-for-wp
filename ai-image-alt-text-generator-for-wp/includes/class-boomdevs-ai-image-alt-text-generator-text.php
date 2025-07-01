@@ -55,8 +55,8 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 		$alt_description_text           = isset( $_REQUEST['generated_description_text'] ) ? sanitize_text_field( $_REQUEST['generated_description_text'] ) : '';
 		$image_title        = isset( $_REQUEST['image_title'] ) ? sanitize_text_field( $_REQUEST['image_title'] ) : '';
 		$image_caption      = isset( $_REQUEST['image_caption'] ) ? sanitize_text_field( $_REQUEST['image_caption'] ) : '';
-		$image_description  = isset( $_REQUEST['image_description'] ) ? sanitize_textarea_field( $_REQUEST['image_description'] ) : '';
-		$image_description_enable  = isset( $_REQUEST['bdaiatg_alt_description'] ) ? sanitize_textarea_field( $_REQUEST['bdaiatg_alt_description'] ) : '';
+		$image_description  = isset( $_REQUEST['image_description'] ) ? sanitize_text_field( $_REQUEST['image_description'] ) : '';
+		$image_description_enable  = isset( $_REQUEST['bdaiatg_alt_description'] ) ? sanitize_text_field( $_REQUEST['bdaiatg_alt_description'] ) : '';
 		$focus_keyword = isset( $_REQUEST['focus_keyword'] ) ? sanitize_text_field( $_REQUEST['focus_keyword'] ) : '';
 
 		// Update post title
@@ -127,7 +127,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 		$image_title = isset($settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_title']) ? $settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_title'] : '';
 		$image_caption = isset($settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_caption']) ? $settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_caption'] : '';
 		$image_description = isset($settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_description']) ? $settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_description'] : '';
-		$image_description_enable  = isset( $settings['bdaiatg_alt_description'] ) ? sanitize_textarea_field( $settings['bdaiatg_alt_description'] ) : '';
+		$image_description_enable  = isset( $settings['bdaiatg_alt_description'] ) ? sanitize_text_field( $settings['bdaiatg_alt_description'] ) : '';
 		$alt_text_length = isset($settings['bdaiatg_alt_text_length']) ? $settings['bdaiatg_alt_text_length'] : '';
 		$focus_keyword = isset($_REQUEST['focus_keyword']) ? $_REQUEST['focus_keyword'] : '';
 		$alt_text_description = isset($settings['bdaiatg_alt_description']) ? $settings['bdaiatg_alt_description'] : '';
@@ -224,7 +224,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 				'focus_keyword'  => $focus_keyword,
 				'image_suffix'  => $image_suffix,
 				'image_prefix'  => $image_prefix,
-				'bdaiatg_alt_description' => $image_description_enable,
+				// 'bdaiatg_alt_description' => $image_description_enable,
 				'bdaiatg_alt_text_length' => $alt_text_length
 			];
 
@@ -330,7 +330,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 		$image_caption = isset($settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_caption']) ? $settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_caption'] : '';
 		$image_description = isset($settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_description']) ? $settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_description'] : '';
 		$alt_text_length = isset($settings['bdaiatg_alt_text_length']) ? $settings['bdaiatg_alt_text_length'] : '';
-		$image_description_enable  = isset( $settings['bdaiatg_alt_description'] ) ? sanitize_textarea_field( $settings['bdaiatg_alt_description'] ) : '';
+		$image_description_enable  = isset( $settings['bdaiatg_alt_description'] ) ? sanitize_text_field( $settings['bdaiatg_alt_description'] ) : '';
 		$focus_keyword = isset($_REQUEST['focus_keyword']) ? $_REQUEST['focus_keyword'] : '';
 		$attachment = $_REQUEST['attachment'];
 		$post_id = $_REQUEST['post_id'];
@@ -382,7 +382,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 			'image_suffix'  => $image_suffix,
 			'focus_keyword'  => $focus_keyword,
 			'image_prefix'  => $image_prefix,
-			'bdaiatg_alt_description' => $image_description_enable,
+			// 'bdaiatg_alt_description' => $image_description_enable,
 			'bdaiatg_alt_text_length' => $alt_text_length
 		];
 
@@ -466,7 +466,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text {
 			$image_caption = isset($settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_caption']) ? $settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_caption'] : '';
 			$image_description = isset($settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_description']) ? $settings['bdaiatg_alt_text_image_wrapper']['bdaiatg_alt_text_image_description'] : '';
 			$alt_text_length = isset($settings['bdaiatg_alt_text_length']) ? $settings['bdaiatg_alt_text_length'] : '';
-			$image_description_enable  = isset( $settings['bdaiatg_alt_description'] ) ? sanitize_textarea_field( $settings['bdaiatg_alt_description'] ) : '';
+			$image_description_enable  = isset( $settings['bdaiatg_alt_description'] ) ? sanitize_text_field( $settings['bdaiatg_alt_description'] ) : '';
 
 			$attachment_url = wp_get_attachment_url($attachment_id);
 

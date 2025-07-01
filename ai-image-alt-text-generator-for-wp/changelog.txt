@@ -46,3 +46,6 @@ Bulk generation feature has been enabled
 Bulk generation speed has been improved
 Bulk generation has been further optimized
 Mail notification has been added after bulk generation completes
+
+= 1.1.5 – 01 July 2025 =
+Fix some minor issues

@@ -8,12 +8,12 @@ class AltUpdateHistory
 {
     public static function store($args = array())
     {
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(array(
-                'message' => 'Permission denied!',
-            ));
-            return false;
-        }
+        // if (!current_user_can('manage_options')) {
+        //     wp_send_json_error(array(
+        //         'message' => 'Permission denied!',
+        //     ));
+        //     return false;
+        // }
         global $wpdb;
 
         $current_user = wp_get_current_user();
