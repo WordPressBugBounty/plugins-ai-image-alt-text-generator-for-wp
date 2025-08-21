@@ -37,7 +37,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Activator
         self::create_tables();
     }
 
-    protected static function create_tables()
+    public static function create_tables()
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
@@ -51,13 +51,11 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Activator
         `gen_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,  
         `gen_by` VARCHAR(100) NOT NULL,
         PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB $charset_collate;";
+        ) ENGINE=InnoDB $charset_collate;";
 
         if (!function_exists('dbDelta')) {
             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
         }
-
         dbDelta($sql);
     }
-
 }

@@ -39,7 +39,6 @@ class BDAIATG_Ai_Image_Alt_Text_Generator_Request extends WP_Background_Process
      */
     protected function complete()
     {
-        delete_option('altgen_attachments_jobs');
         parent::complete();
     }
 }

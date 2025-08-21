@@ -284,6 +284,7 @@
   background: #ffffff94;
   z-index: 5;
   transition: all 0.3s ease-in-out;
+  cursor: not-allowed;
 }
 /* .boomdevs_ai_img_alt_text_generator_bulk .baiatgd_bulk_smush_btn_wrapper .generate_button_wrap .generate_alt_text_btn_loader::after, */
 /* .boomdevs_ai_img_alt_text_generator_bulk .baiatgd_bulk_smush_btn_wrapper .generate_button_wrap .generate_alt_text_btn_loader::before {
@@ -805,9 +806,9 @@ body.toplevel_page_ai-alt-text-generator #wpcontent {
   z-index: 1000;
 }
 
-.baiatgd_modal-content {
-  background-color: white;
-  padding: 30px;
+.baiatgd_modal_content_wrapper {
+  background-color: #fff;
+  padding: 40px;
   border-radius: 12px;
   width: 90%;
   max-width: 500px;
@@ -826,12 +827,76 @@ body.toplevel_page_ai-alt-text-generator #wpcontent {
   color: red;
 }
 
-.baiatgd_modal-content p {
-  margin: 0;
-  font-size: 16px;
+.baiatgd_modal_content .content_text {
+  font-size: 14px !important;
   color: #333;
-  /* text-align: center; */
 }
+
+.baiatgd_modal_content_wrapper p{
+
+}
+
+.bdaiatg_post_column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 34px;
+  border: none;
+  background-color: #2271b1;
+  border-radius: 3px;
+  color: #fff;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.bdaiatg_post_column:hover {
+  background-color: #135e96;
+}
+
+.bdaiatg_post_column:disabled {
+  cursor: not-allowed;
+}
+.ai-alt-text-history tr .actions.column-actions {
+  position: relative;
+}
+
+.ai-alt-text-history tr .actions.column-actions span.update-message {
+  position: absolute;
+  top: 46px;
+  left: 11px;
+}
+
+.altg_column_loader {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      position: relative;
+      animation: rotate 1s linear infinite;
+      display: none;
+    }
+    .altg_column_loader::before {
+      content: "";
+      box-sizing: border-box;
+      position: absolute;
+      inset: 0px;
+      border-radius: 50%;
+      border: 2px solid #FFF;
+      animation: prixClipFix 2s linear infinite ;
+    }
+
+    @keyframes rotate {
+      100%   {transform: rotate(360deg)}
+    }
+
+    @keyframes prixClipFix {
+        0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+        25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+        50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+        75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+        100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+    }
+
 
 .bulk_loader {
       width: 20px;

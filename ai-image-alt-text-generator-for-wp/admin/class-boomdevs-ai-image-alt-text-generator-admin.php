@@ -122,6 +122,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin
         $alt_text_description = isset($settings['bdaiatg_alt_description']) ? $settings['bdaiatg_alt_description'] : '';
 
         $nonce = wp_create_nonce('import_csv');
+        // $has_jobs_list = get_option('altgen_attachments_jobs');
         $has_jobs_list = get_option('altgen_attachments_jobs');
 
         if (!$has_jobs_list) {
@@ -243,13 +244,14 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin
         // update_option('bdaiatg_bulk_generating', true);
 
         $bulk_generating = get_option('bdaiatg_bulk_generating');
+        $is_dashboard_page = $this->is_dashboard_page();
 
         if ($bulk_generating) {
             $bulk_generating = true;
         } else {
             $bulk_generating = false;
         }
-        
+
         wp_localize_script(
             $this->plugin_name . 'edit-media',
             'import_csv',
@@ -275,6 +277,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin
                 'api_url' => defined('BDAIATG_API_URL') ? BDAIATG_API_URL : '',
                 'current_item_id' => $item_id, // Add the current item ID
                 'bulk_generating' => $bulk_generating,
+                'is_dashboard_page' => $is_dashboard_page ? 1 : 0,
             )
         );
 
@@ -364,6 +367,11 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Admin
         wp_send_json_success(array(
             'focus_keyword' => $focus_keyword,
         ));
+    }
+
+    public function is_dashboard_page($slug = 'ai-alt-text-generator')
+    {
+        return is_admin() && isset($_GET['page']) && $_GET['page'] === $slug;
     }
 }
 

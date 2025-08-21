@@ -48,7 +48,7 @@ function ai_alt_text_history_page()
 ?>
     <div class="wrap">
         <h1 class="wp-heading-inline">History</h1>
-        <form method="post">
+        <form method="post" class="ai-alt-text-history">
             <?php
             $wp_list_table = new AI_Alt_Text_History_Table();
             $wp_list_table->prepare_items();
@@ -220,9 +220,18 @@ function boomdevs_alt_text_menu_content()
             </div>
         </div>
         <div id="baiatgd_comming_soon" class="baiatgd_comming_soon_modal">
-            <div class="baiatgd_modal-content">
+            <div class="baiatgd_modal_content_wrapper">
                 <button class="baiatgd_modal_close-btn" id="baiatgd_close_modal">×</button>
-                <p>Bulk generation has started! We’ll email you when it’s done, or you can track progress on your dashboard.</p>
+                <div class="baiatgd_modal_content">
+                    <h2 class="baiatgd_bulk_title">Bulk image generation has started!</h2>
+                    <p class="content_text">Due to some technical limitations, we can currently process up to <span style="color: #4834D4; font-weight: 700">1000</span> images at a time. We kindly ask for your cooperation on this.</p>
+
+                    <p class="content_text">When you click “Generate Alt Text”, you’ll be able to track your progress anytime through the progress bar or from the <a style="color: #4834D4; font-weight: 700" href="<?php echo admin_url('admin.php?page=boomdevs-ai-image-alt-text-generator-history'); ?>">History Page</a>.</p>
+
+                    <p class="content_text">Once the first batch of <span style="color: #4834D4; font-weight: 700">1000</span> images is completed, you can simply click “Generate Alt Text” again to continue with the next batch.</p>
+
+                    <p class="content_text" style="margin-bottom: 0;">Thanks for your patience and understanding!</p>
+                </div>
             </div>
         </div>
     </div>

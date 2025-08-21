@@ -4,16 +4,21 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class AltUpdateHistory
+class Boomdevs_Ai_Image_Alt_Text_Generator_Image_Update_History
 {
+    function __construct()
+    {
+        add_action("wp_ajax_update_attachment_meta", [$this, 'update_attachment_meta']);
+        add_action("wp_ajax_nopriv_update_attachment_meta", [$this, 'update_attachment_meta']);
+    }
+
+    public static function run()
+    {
+        return new self();
+    }
+
     public static function store($args = array())
     {
-        // if (!current_user_can('manage_options')) {
-        //     wp_send_json_error(array(
-        //         'message' => 'Permission denied!',
-        //     ));
-        //     return false;
-        // }
         global $wpdb;
 
         $current_user = wp_get_current_user();
@@ -56,4 +61,26 @@ class AltUpdateHistory
             return $wpdb->insert_id;
         }
     }
+
+    public function update_attachment_meta()
+    {
+        if (!isset($_POST['media_id']) || !isset($_POST['alt_text']) || !wp_verify_nonce($_POST['nonce'], 'import_csv')) {
+            wp_send_json_error(['message' => 'Invalid request or nonce verification failed.']);
+            wp_die();
+        }
+
+        $media_id = intval($_POST['media_id']);
+        $alt_text = sanitize_text_field($_POST['alt_text']);
+
+        if (!get_post($media_id) || get_post_type($media_id) !== 'attachment') {
+            wp_send_json_error(['message' => 'Invalid attachment ID.']);
+            wp_die();
+        }
+
+        update_post_meta($media_id, '_wp_attachment_image_alt', $alt_text);
+
+        wp_send_json_success(['message' => 'Alt text updated successfully.']);
+        wp_die();
+    }
+
 }

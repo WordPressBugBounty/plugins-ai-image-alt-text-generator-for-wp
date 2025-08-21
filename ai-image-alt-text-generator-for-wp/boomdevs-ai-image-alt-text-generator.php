@@ -18,7 +18,7 @@ require __DIR__ . '/vendor/autoload.php';
  * Plugin Name:       Ai Image Alt Text Generator for WP
  * Plugin URI:        https://aialttextgenerator.com/
  * Description:       Effortlessly generate descriptive alt text for images using AI within your WordPress website.
- * Version:           1.1.5
+ * Version:           1.1.6
  * Author:            WP Messiah
  * Author URI:        https://wpmessiah.com/
  * License:           GPL-2.0+
@@ -39,7 +39,7 @@ if (!defined('ABSPATH')) {
  */
 
 
-define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.1.5');
+define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION', '1.1.6');
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_PATH', plugin_dir_path(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL', plugin_dir_url(__FILE__));
 define('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_NAME', 'ai-image-alt-text-generator-for-wp');
@@ -49,7 +49,6 @@ define('BDAIATG_DB_ASSET_TABLE', 'bdaiatg_assets');
 define('BDAIATG_API_URL', 'https://aialttextgenerator.com');
 
 define('BDAIATG_AI_IMAGE_ALTTEXT_BACKEND_URL', 'https://wpmessiah.com/wp-json/notification-api/v1/get');
-
 
 // Development mode
 define('BDAIATG_DEVELOPMENT', false);
@@ -65,6 +64,11 @@ function boomdevs_ai_image_alt_text_generator_activate()
 }
 
 /**
+ * The code that runs during plugin update.
+ * This action is documented in includes/class-boomdevs-ai-image-alt-text-generator-activator.php
+ */
+
+/**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-boomdevs-ai-image-alt-text-generator-deactivator.php
  */
@@ -76,6 +80,7 @@ function boomdevs_ai_image_alt_text_generator_deactivate()
 
 register_activation_hook(__FILE__, 'boomdevs_ai_image_alt_text_generator_activate');
 register_deactivation_hook(__FILE__, 'boomdevs_ai_image_alt_text_generator_deactivate');
+
 
 /**
  * The core plugin class that is used to define internationalization,
