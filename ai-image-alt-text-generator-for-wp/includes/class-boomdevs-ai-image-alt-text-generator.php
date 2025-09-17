@@ -72,7 +72,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator
         if (defined('BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION')) {
             $this->version = BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_VERSION;
         } else {
-            $this->version = '1.1.6';
+            $this->version = '1.1.7';
         }
         $this->plugin_name = 'ai-image-alt-text-generator-for-wp';
 

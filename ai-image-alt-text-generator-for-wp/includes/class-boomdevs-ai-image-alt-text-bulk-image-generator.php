@@ -156,13 +156,9 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
 
         $attachments = get_posts($args);
         $alt_text_attachments = array();
-        $total_image_send = 0;
-        $max_image_send = 1000;
 
         foreach ($attachments as $attachment) {
-            if ($total_image_send >= $max_image_send) {
-                break;
-            }
+
 
             $attachment_url = wp_get_attachment_url($attachment->ID);
             if (!$attachment_url) {
@@ -188,18 +184,16 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
                 if ($overrite_existing_images === 'false') {
                     $alt_text = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
                     if (empty($alt_text)) {
-                        $total_image_send++;
                         $alt_text_attachments[] = array(
                             'id' => $attachment->ID,
-                            'url' => $attachment_url, // Fixed: was using 'file_url', now 'url'
+                            'url' => $attachment_url, 
                             'status' => false,
                         );
                     }
                 } else {
-                    $total_image_send++;
                     $alt_text_attachments[] = array(
                         'id' => $attachment->ID,
-                        'url' => $attachment_url, // Fixed: was using 'file_url', now 'url'
+                        'url' => $attachment_url,
                         'status' => false,
                     );
                 }
@@ -262,7 +256,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
         ];
 
         $headers = array(   
-            'Content-Type' => 'application/json', // Added content type
+            'Content-Type' => 'application/json', 
             'token' => $api_key,
         );
 
@@ -272,7 +266,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
             'method' => 'POST',
             'headers' => $headers,
             'body' => wp_json_encode($data_send),
-            'timeout' => 60, // Increased timeout for bulk processing
+            'timeout' => 60, 
             'sslverify' => false,
         ];
 

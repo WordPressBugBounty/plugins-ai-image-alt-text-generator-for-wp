@@ -47,8 +47,25 @@ function ai_alt_text_history_page()
 {
 ?>
     <div class="wrap">
-        <h1 class="wp-heading-inline">History</h1>
-        <form method="post" class="ai-alt-text-history">
+        <form method="post" class="baiatgd_ai_alt_text_history_form">
+            <div class="baiatgd_history_header">
+                <h1 class="wp-heading-inline">
+                    <?php esc_html_e('Alt Text Generation History', 'ai-image-alt-text-generator-for-wp'); ?>
+                   
+                </h1>
+                <p>
+                <?php 
+                printf(
+                    wp_kses(
+                        __('A list of all images in your Media Library that have been processed using the <span>AI Image Alt Text Generator for WP.</span>', 'ai-image-alt-text-generator-for-wp'),
+                        array(
+                            'span' => array()
+                        )
+                    )
+                ); 
+                ?>
+                </p>
+            </div>
             <?php
             $wp_list_table = new AI_Alt_Text_History_Table();
             $wp_list_table->prepare_items();
@@ -77,7 +94,7 @@ function boomdevs_alt_text_menu_content()
                     <span class="content_text">
                         <?php esc_html_e('Images in your library', 'ai-image-alt-text-generator-for-wp'); ?>
                     </span>
-                    <span class="content_number">
+                    <span class="content_number" >
                         <?php echo esc_html(BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$all_images); ?>
                     </span>
                 </div>
@@ -91,7 +108,7 @@ function boomdevs_alt_text_menu_content()
                     <span class="content_text">
                         <?php echo esc_html_e('Images Missing Alt Text', 'ai-image-alt-text-generator-for-wp'); ?>
                     </span>
-                    <span class="content_number">
+                    <span class="content_number" id="missing_alt_text_count">
                         <?php echo esc_html(BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$missing_alt_text_count); ?>
                     </span>
                 </div>
@@ -219,7 +236,7 @@ function boomdevs_alt_text_menu_content()
                     id="total_attachment_count">0</span> images optimized
             </div>
         </div>
-        <div id="baiatgd_comming_soon" class="baiatgd_comming_soon_modal">
+        <!-- <div id="baiatgd_comming_soon" class="baiatgd_comming_soon_modal">
             <div class="baiatgd_modal_content_wrapper">
                 <button class="baiatgd_modal_close-btn" id="baiatgd_close_modal">×</button>
                 <div class="baiatgd_modal_content">
@@ -233,7 +250,7 @@ function boomdevs_alt_text_menu_content()
                     <p class="content_text" style="margin-bottom: 0;">Thanks for your patience and understanding!</p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 <?php
 

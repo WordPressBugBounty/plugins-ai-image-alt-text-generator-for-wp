@@ -65,7 +65,7 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Image_Update_History
     public function update_attachment_meta()
     {
         if (!isset($_POST['media_id']) || !isset($_POST['alt_text']) || !wp_verify_nonce($_POST['nonce'], 'import_csv')) {
-            wp_send_json_error(['message' => 'Invalid request or nonce verification failed.']);
+            wp_send_json_error(['message' => 'Invalid request']);
             wp_die();
         }
 
@@ -73,13 +73,13 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Image_Update_History
         $alt_text = sanitize_text_field($_POST['alt_text']);
 
         if (!get_post($media_id) || get_post_type($media_id) !== 'attachment') {
-            wp_send_json_error(['message' => 'Invalid attachment ID.']);
+            wp_send_json_error(['message' => 'Update failed: media not found.']);
             wp_die();
         }
 
         update_post_meta($media_id, '_wp_attachment_image_alt', $alt_text);
 
-        wp_send_json_success(['message' => 'Alt text updated successfully.']);
+        wp_send_json_success(['message' => 'Updated successfully']);
         wp_die();
     }
 
