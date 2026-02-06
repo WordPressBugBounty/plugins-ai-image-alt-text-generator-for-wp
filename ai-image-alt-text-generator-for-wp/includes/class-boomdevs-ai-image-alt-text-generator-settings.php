@@ -92,9 +92,6 @@ if (!class_exists('BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings')) {
 				'show_reset_all'  => true,
 				'show_reset_section'  => false,
 				'show_search'     => false,
-				// Additional configuration options (commented out for now)
-				// 'nav'              => 'inline',
-				// 'theme'            => 'light',
 				'class'           => 'boomdevs_ai_img_alt_text_generator',
 				'menu_position'   => 59,
 			);
@@ -673,15 +670,7 @@ if (!class_exists('BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings')) {
 							'false'
 						),
 					),
-					// array(
-					// 	'id'      => 'bdaiatg_alt_post_column',
-					// 	'type'    => 'checkbox',
-					// 	'title'   => esc_html__('Enable Post Table colum', 'ai-image-alt-text-generator-for-wp'),
-					// 	'after' => esc_html__('Enable the Alt Text Generator button in the Post Table column to generate alt text for featured images directly from the posts list.', 'ai-image-alt-text-generator-for-wp'),
-					// 	'label'   => esc_html__('Enable', 'ai-image-alt-text-generator-for-wp'),
-					// 	'default' => false,
 
-					// ),
 					// Start Alt Text Image Types
 					array(
 						'id'     => 'bdaiatg_alt_text_image_types_wrapper',

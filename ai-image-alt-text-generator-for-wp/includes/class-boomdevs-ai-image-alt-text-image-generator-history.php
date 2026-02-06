@@ -10,7 +10,7 @@ if (!class_exists('WP_List_Table')) {
     require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
 }
 
-class AI_Alt_Text_History_Table extends WP_List_Table
+class Boomdevs_Ai_Image_Alt_Text_Generator_History extends WP_List_Table
 {
     private $table_name;
 
@@ -139,9 +139,10 @@ class AI_Alt_Text_History_Table extends WP_List_Table
      */
     public function column_default($item, $column_name)
     {
+        $edit_url = admin_url('upload.php?item=' . intval($item['attachment_id']));
+        $image_url = wp_get_attachment_image_url($item['attachment_id'], 'thumbnail');
         switch ($column_name) {
             case 'baiatgd_history_media_id':
-                $edit_url = admin_url('upload.php?item=' . intval($item['attachment_id']));
                 return sprintf(
                     '<a href="%s" target="_blank"><h3 class="baiatgd_history_media_id">%s</h3></a>',
                     esc_url($edit_url),
@@ -149,12 +150,11 @@ class AI_Alt_Text_History_Table extends WP_List_Table
                 );
 
             case 'baiatgd_history_image':
-                $edit_url = admin_url('upload.php?item=' . intval($item['attachment_id']));
                 return $item['image_url']
                     ? sprintf(
                         '<a href="%s" target="_blank"><img src="%s" class="image-preview"></a>',
                         esc_url($edit_url),
-                        esc_url($item['image_url'])
+                        esc_url($image_url)
                     )
                     : 'Media not found';
 

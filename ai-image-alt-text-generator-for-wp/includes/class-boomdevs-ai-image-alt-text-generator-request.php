@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 
 require_once plugin_dir_path(dirname(__FILE__)) . '/includes/class-boomdevs-ai-image-alt-text-bulk-image-generator.php';
 
-class BDAIATG_Ai_Image_Alt_Text_Generator_Request extends WP_Background_Process
+class BDAIATG_Ai_Image_Alt_Text_Generator_Request extends BDAIATG_Background_Process
 {
     /**
      * @var string

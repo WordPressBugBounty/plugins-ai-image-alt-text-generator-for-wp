@@ -12,31 +12,31 @@ function boomdevs_alt_text_gen_custom_menu()
     $plugin_logo = BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/plugin-logo.svg';
 
     add_menu_page(
-        esc_html('Ai Alt Text Generator', 'ai-image-alt-text-generator-for-wp'),
-        esc_html('Ai Alt Text Generator', 'ai-image-alt-text-generator-for-wp'),
-        'manage_options',
-        'ai-alt-text-generator',
-        'boomdevs_alt_text_menu_content',
-        $plugin_logo,
-        59
+            esc_html('Ai Alt Text Generator', 'ai-image-alt-text-generator-for-wp'),
+            esc_html('Ai Alt Text Generator', 'ai-image-alt-text-generator-for-wp'),
+            'manage_options',
+            'ai-alt-text-generator',
+            'boomdevs_alt_text_menu_content',
+            $plugin_logo,
+            59
     );
     add_submenu_page(
-        'ai-alt-text-generator',
-        esc_html__('Ai Alt Text Generator History', 'ai-image-alt-text-generator-for-wp'),
-        esc_html__('History', 'ai-image-alt-text-generator-for-wp'),
-        'manage_options',
-        'boomdevs-ai-image-alt-text-generator-history',
-        'ai_alt_text_history_page'
+            'ai-alt-text-generator',
+            esc_html__('Ai Alt Text Generator History', 'ai-image-alt-text-generator-for-wp'),
+            esc_html__('History', 'ai-image-alt-text-generator-for-wp'),
+            'manage_options',
+            'boomdevs-ai-image-alt-text-generator-history',
+            'ai_alt_text_history_page'
     );
 
 
     add_submenu_page(
-        'ai-alt-text-generator',
-        esc_html('Settings', 'ai-image-alt-text-generator-for-wp'),
-        __('Settings', 'ai-image-alt-text-generator-for-wp'),
-        'manage_options',
-        '/admin.php?page=boomdevs-ai-image-alt-text-generator-settings',
-        ''
+            'ai-alt-text-generator',
+            esc_html('Settings', 'ai-image-alt-text-generator-for-wp'),
+            __('Settings', 'ai-image-alt-text-generator-for-wp'),
+            'manage_options',
+            'boomdevs-ai-image-alt-text-generator-settings',
+            ''
     );
 }
 
@@ -45,35 +45,28 @@ add_action('admin_menu', 'boomdevs_alt_text_gen_custom_menu');
 // Function to render the admin page
 function ai_alt_text_history_page()
 {
-?>
+    ?>
     <div class="wrap">
         <form method="post" class="baiatgd_ai_alt_text_history_form">
             <div class="baiatgd_history_header">
                 <h1 class="wp-heading-inline">
                     <?php esc_html_e('Alt Text Generation History', 'ai-image-alt-text-generator-for-wp'); ?>
-                   
+
                 </h1>
                 <p>
-                <?php 
-                printf(
-                    wp_kses(
-                        __('A list of all images in your Media Library that have been processed using the <span>AI Image Alt Text Generator for WP.</span>', 'ai-image-alt-text-generator-for-wp'),
-                        array(
-                            'span' => array()
-                        )
-                    )
-                ); 
-                ?>
+                    <?php
+                    echo __('A list of all images in your Media Library that have been processed using the <a style="text-decoration: none" target="_blank" href="https://aialttextgenerator.com/" ><span>AI Image Alt Text Generator for WP</span></a>', 'ai-image-alt-text-generator-for-wp');
+                    ?>
                 </p>
             </div>
             <?php
-            $wp_list_table = new AI_Alt_Text_History_Table();
+            $wp_list_table = new Boomdevs_Ai_Image_Alt_Text_Generator_History();
             $wp_list_table->prepare_items();
             $wp_list_table->display();
             ?>
         </form>
     </div>
-<?php
+    <?php
 }
 
 
@@ -88,13 +81,13 @@ function boomdevs_alt_text_menu_content()
             <div class="baiatgd_single_card">
                 <div class="baiatgd_card_img_wrapper">
                     <img src="<?php echo esc_url(BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/gallery.png'); ?>"
-                        class="baiatgd_card_img" alt="bulk-generate">
+                         class="baiatgd_card_img" alt="bulk-generate">
                 </div>
                 <div class="baiatgd_card_content">
                     <span class="content_text">
                         <?php esc_html_e('Images in your library', 'ai-image-alt-text-generator-for-wp'); ?>
                     </span>
-                    <span class="content_number" >
+                    <span class="content_number">
                         <?php echo esc_html(BDAIATG_Boomdevs_Ai_Image_Alt_Text_Generator_Settings::$all_images); ?>
                     </span>
                 </div>
@@ -102,7 +95,7 @@ function boomdevs_alt_text_menu_content()
             <div class="baiatgd_single_card">
                 <div class="baiatgd_card_img_wrapper">
                     <img src="<?php echo esc_url(BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/gallery-remove.png'); ?>"
-                        class="baiatgd_card_img" alt="bulk-generate">
+                         class="baiatgd_card_img" alt="bulk-generate">
                 </div>
                 <div class="baiatgd_card_content">
                     <span class="content_text">
@@ -117,7 +110,7 @@ function boomdevs_alt_text_menu_content()
                 <div class="baiatgd_single_card_top">
                     <div class="baiatgd_card_img_wrapper">
                         <img src="<?php echo esc_url(BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/database.png'); ?>"
-                            class="baiatgd_card_img" alt="bulk-generate">
+                             class="baiatgd_card_img" alt="bulk-generate">
                     </div>
                     <div class="baiatgd_card_content">
                         <span class="content_text">
@@ -153,9 +146,9 @@ function boomdevs_alt_text_menu_content()
                 $url = 'https://aialttextgenerator.com/wp-json/alt-text-generator/v1/available-token';
 
                 $args = array(
-                    'headers' => array(
-                        'token' => $api_key,
-                    )
+                        'headers' => array(
+                                'token' => $api_key,
+                        )
                 );
 
                 $response = wp_remote_post($url, $args);
@@ -167,11 +160,11 @@ function boomdevs_alt_text_menu_content()
                     if ((isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] === '')): ?>
                         <div class="overlay_for_plan">
                             You don't have any plan please<a
-                                style="margin-left: 5px; display: inline-block; margin-top: 10px"
-                                href="https://aialttextgenerator.com/register/" target="_blank"><b>Get Started for
+                                    style="margin-left: 5px; display: inline-block; margin-top: 10px"
+                                    href="https://aialttextgenerator.com/register/" target="_blank"><b>Get Started for
                                     Free</b></a>.
                         </div>
-                <?php endif;
+                    <?php endif;
                 } ?>
             </div>
         </div>
@@ -179,10 +172,10 @@ function boomdevs_alt_text_menu_content()
             <span class="notice_text">
                 <?php if ((isset($settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key']) && $settings['bdaiatg_api_key_wrapper']['bdaiatg_api_key'] === '') || !$decoded_response): ?>
                     You don't have any plan please<a style="margin-left: 5px; display: inline-block"
-                        href="https://aialttextgenerator.com/register/" target="_blank">Get Started for Free</a>.
+                                                     href="https://aialttextgenerator.com/register/" target="_blank">Get Started for Free</a>.
                 <?php else: ?>
                     You are on the <span id="subscription_plan">Free plan</span> with <span
-                        id="remaining_credit">0</span> credits remaining.
+                            id="remaining_credit">0</span> credits remaining.
                     <a href="https://aialttextgenerator.com/pricing/" target="_blank">Purchase more credits</a>
                     to keep going!
                 <?php endif; ?>
@@ -226,33 +219,18 @@ function boomdevs_alt_text_menu_content()
                     <div class="baiatgd_percentage_wrapper_cancel">
                         <div class="spinner-icon">
                             <img src="<?php echo esc_url(BDAIATG_AI_IMAGE_ALT_TEXT_GENERATOR_URL . 'admin/img/spinner.gif'); ?>"
-                                alt="spinner">
+                                 alt="spinner">
                         </div>
                         <span class="baiatgd_bulk_cancal" id="cancel_bulk_alt_image_generator">Cancel</span>
                     </div>
                 </div>
             </div>
             <div class="baiatgd_bulk_progress_optimized"><span id="attachment_generated_count">0</span>/<span
-                    id="total_attachment_count">0</span> images optimized
+                        id="total_attachment_count">0</span> images optimized
             </div>
         </div>
-        <!-- <div id="baiatgd_comming_soon" class="baiatgd_comming_soon_modal">
-            <div class="baiatgd_modal_content_wrapper">
-                <button class="baiatgd_modal_close-btn" id="baiatgd_close_modal">×</button>
-                <div class="baiatgd_modal_content">
-                    <h2 class="baiatgd_bulk_title">Bulk image generation has started!</h2>
-                    <p class="content_text">Due to some technical limitations, we can currently process up to <span style="color: #4834D4; font-weight: 700">1000</span> images at a time. We kindly ask for your cooperation on this.</p>
-
-                    <p class="content_text">When you click “Generate Alt Text”, you’ll be able to track your progress anytime through the progress bar or from the <a style="color: #4834D4; font-weight: 700" href="<?php echo admin_url('admin.php?page=boomdevs-ai-image-alt-text-generator-history'); ?>">History Page</a>.</p>
-
-                    <p class="content_text">Once the first batch of <span style="color: #4834D4; font-weight: 700">1000</span> images is completed, you can simply click “Generate Alt Text” again to continue with the next batch.</p>
-
-                    <p class="content_text" style="margin-bottom: 0;">Thanks for your patience and understanding!</p>
-                </div>
-            </div>
-        </div> -->
     </div>
-<?php
+    <?php
 
 }
 

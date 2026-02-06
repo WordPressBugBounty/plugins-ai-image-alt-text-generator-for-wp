@@ -266,7 +266,7 @@ class Boomdevs_Ai_Image_Alt_Text_Bulk_Image_Generator
             'method' => 'POST',
             'headers' => $headers,
             'body' => wp_json_encode($data_send),
-            'timeout' => 60, 
+            'timeout' => 30,
             'sslverify' => false,
         ];
 

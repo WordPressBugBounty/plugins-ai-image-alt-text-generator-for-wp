@@ -11,7 +11,6 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Image_Update_History
         add_action("wp_ajax_update_attachment_meta", [$this, 'update_attachment_meta']);
         add_action("wp_ajax_nopriv_update_attachment_meta", [$this, 'update_attachment_meta']);
     }
-
     public static function run()
     {
         return new self();

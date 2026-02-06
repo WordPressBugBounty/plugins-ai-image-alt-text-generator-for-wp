@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: Alternative Text, image alt text
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.1.7
+Stable tag: 1.1.9
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -183,3 +183,12 @@ Improved performance
 = 1.1.7 – 17 September 2025 =
 Unlimited bulk image requests with one click
 Redesigned history page with enhanced tracking
+
+= 1.1.8 - 14 October 2025 =
+Fixed bulk action conflict issue with Rank Math SEO and WooCommerce plugins
+Fixed heavy loading time on the History page
+Fixed issue with the Free plan display on the dashboard
+
+= 1.1.9 - 4 November 2025 =
+Fix: some minor issues
+Improved performance

@@ -10,7 +10,7 @@
  *
  * @abstract
  */
-abstract class WP_Async_Request {
+abstract class BDAIATG_Async_Request {
 
 	/**
 	 * Prefix

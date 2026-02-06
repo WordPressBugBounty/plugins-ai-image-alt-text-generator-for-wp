@@ -11,7 +11,7 @@
  * @abstract
  * @extends WP_Async_Request
  */
-abstract class WP_Background_Process extends WP_Async_Request {
+abstract class BDAIATG_Background_Process extends BDAIATG_Async_Request {
 
 	/**
 	 * Action

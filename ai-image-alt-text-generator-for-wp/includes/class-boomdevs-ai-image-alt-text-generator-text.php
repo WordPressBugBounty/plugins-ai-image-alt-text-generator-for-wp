@@ -489,7 +489,6 @@ class Boomdevs_Ai_Image_Alt_Text_Generator_Text
             ];
 
             $headers = array(
-                //            'Content-Type' => 'application/json',
                 'token' => $api_key,
             );
 
